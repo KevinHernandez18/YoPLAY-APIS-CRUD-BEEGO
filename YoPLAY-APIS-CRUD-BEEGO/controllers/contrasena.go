@@ -125,7 +125,7 @@ func (c *ContrasenaController) GetAll() {
 		c.Data["json"] = err.Error()
 	} else {
 		if l== nil{
-			c.Data["json"] = map[string]interface{}{"succes":false,"status":400, "Messaje":"ERROR EN EL SERVICIO DE GetOnes: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+			c.Data["json"] = map[string]interface{}{"succes":false,"status":400, "Messaje":"ERROR EN EL SERVICIO DE GetAll: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 		}else{
 		c.Data["json"] = map[string]interface{}{"succes":true, "status":200, "Messaje":"EXITOSO", "Data": l}
 	}

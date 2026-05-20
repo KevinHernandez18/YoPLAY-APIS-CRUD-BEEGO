@@ -6,7 +6,7 @@ import (
 	"errors"
 	"strconv"
 	"strings"
-
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -35,17 +35,16 @@ func (c *DocumentoController) Post() {
 	var v models.Documento
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddDocumento(&v); err == nil {
-			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+		c.Ctx.Output.SetStatus(201)
+			c.Data["json"] = map[string]interface{}{"succes":true, "status": 201, "Messaje":"SE CREARON LOS DATOS CON EXITO", "Data":v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":"NO SE ENCONTRO NINGUN PARAMETRO PARA CREAR"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":" JSON VACIO O PARAMETROS INVALIDOS"}
 	}
 	c.ServeJSON()
 }
-
 // GetOne ...
 // @Title Get One
 // @Description get Documento by id
@@ -58,9 +57,10 @@ func (c *DocumentoController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetDocumentoById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 400, "Messaje":"ERROR EN EL SERVICIO GetOne: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 200, "Messaje":"PETICION exitosa", "Data": v}
 	}
 	c.ServeJSON()
 }
@@ -123,8 +123,12 @@ func (c *DocumentoController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l== nil{
+			c.Data["json"] = map[string]interface{}{"succes":false,"status":400, "Messaje":"ERROR EN EL SERVICIO DE GetAll: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+		}else{
+		c.Data["json"] = map[string]interface{}{"succes":true, "status":200, "Messaje":"EXITOSO", "Data": l}
 	}
+}
 	c.ServeJSON()
 }
 
@@ -142,12 +146,13 @@ func (c *DocumentoController) Put() {
 	v := models.Documento{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateDocumentoById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{
+				"succes":true, "status": 200, "Messaje": "SE REALIZO ACTUALIZACION CON EXITO", "Data" :v}
 		} else {
 			c.Data["json"] = err.Error()
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":"ERROR EN EL SERVICIO DEL PUT: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	}
 	c.ServeJSON()
 }
@@ -163,7 +168,7 @@ func (c *DocumentoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteDocumento(id); err == nil {
-		c.Data["json"] = "OK"
+		c.Data["json"] = map[string]interface{}{"succes": true, "status":200, "Messaje": "SE ELIMINO EL REGISTRO" , "Data":id}
 	} else {
 		c.Data["json"] = err.Error()
 	}
