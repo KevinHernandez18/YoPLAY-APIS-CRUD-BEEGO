@@ -36,12 +36,12 @@ func (c *UsuarioController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddUsuario(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"succes": true, "status":201, "Mensaje": "SE CREARON LOS DATOS EXITOSAMENTE", "Data":v} 
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"succes":false, "status":400, "Messaje":"NO ENCONTRO NINGUN PARAMETRO PARA CREAR"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":false, "status":400, "Messaje":"ERROR JSON VACIO O PARAMETROS INVALIDOS"}
 	}
 	c.ServeJSON()
 }
@@ -58,9 +58,9 @@ func (c *UsuarioController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetUsuarioById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":false, "status":400, "Messaje":"ERROR EN EL SERVICIO: NO SE ENCUENTRAN REGISTROS O DATOS INVALIDOS"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"succes": true, "status":200, "Messaje":"PETICION EXITOSA", "Data":v}
 	}
 	c.ServeJSON()
 }
@@ -123,10 +123,15 @@ func (c *UsuarioController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l== nil{
+			c.Data["json"] = map[string]interface{}{"succes":false,"status":400, "Messaje":"ERROR EN EL SERVICIO DE GetAll: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+		}else{
+		c.Data["json"] = map[string]interface{}{"succes":true, "status":200, "Messaje":"EXITOSO", "Data": l}
 	}
+}
 	c.ServeJSON()
 }
+
 
 // Put ...
 // @Title Put
@@ -142,12 +147,14 @@ func (c *UsuarioController) Put() {
 	v := models.Usuario{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateUsuarioById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{
+				"succes":true, "status": 200, "Messaje": "SE REALIZO ACTUALIZACION CON EXITO", "Data" :v}
 		} else {
 			c.Data["json"] = err.Error()
 		}
 	} else {
-		c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"succes":true, "status": 400, "Messaje":"ERROR EN EL SERVICIO PUT: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+
 	}
 	c.ServeJSON()
 }
@@ -163,7 +170,7 @@ func (c *UsuarioController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteUsuario(id); err == nil {
-		c.Data["json"] = "OK"
+		c.Data["json"] = map[string]interface{}{"succes": true, "status":200, "Messaje": "SE ELIMINO EL REGISTRO" , "Data":id}
 	} else {
 		c.Data["json"] = err.Error()
 	}

@@ -152,7 +152,7 @@ func (c *HistorialAccesoController) Put() {
 			c.Data["json"] = err.Error()
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 400, "Messaje":"ERROR EN EL SERVICIO PUT: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	}
 	c.ServeJSON()
 }
