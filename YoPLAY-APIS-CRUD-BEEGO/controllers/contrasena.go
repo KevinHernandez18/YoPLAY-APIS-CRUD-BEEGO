@@ -6,7 +6,7 @@ import (
 	"errors"
 	"strconv"
 	"strings"
-
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -36,12 +36,12 @@ func (c *ContrasenaController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddContrasena(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"succes":true, "status": 201, "Messaje":"SE CREARON LOS DATOS CON EXITO", "Data":v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":"NO SE ENCONTRO NINGUN PARAMETRO PARA CREAR"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":"NO JSON VACIO O PARAMETROS INVALIDOS"}
 	}
 	c.ServeJSON()
 }
@@ -58,9 +58,10 @@ func (c *ContrasenaController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetContrasenaById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 400, "Messaje":"ERROR EN EL SERVICIO GetOne: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 200, "Messaje":"PETICION exitosa", "Data": v}
 	}
 	c.ServeJSON()
 }
@@ -123,8 +124,12 @@ func (c *ContrasenaController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		if l== nil{
+			c.Data["json"] = map[string]interface{}{"succes":false,"status":400, "Messaje":"ERROR EN EL SERVICIO DE GetOnes: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+		}else{
+		c.Data["json"] = map[string]interface{}{"succes":true, "status":200, "Messaje":"EXITOSO", "Data": l}
 	}
+}
 	c.ServeJSON()
 }
 
@@ -142,12 +147,13 @@ func (c *ContrasenaController) Put() {
 	v := models.Contrasena{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateContrasenaById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{
+				"succes":true, "status": 200, "Messaje": "SE REALIZO ACTUALIZACION CON EXITO", "Data" :v}
 		} else {
 			c.Data["json"] = err.Error()
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":"ERROR EN EL SERVICIO DEL PUT: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	}
 	c.ServeJSON()
 }
@@ -163,7 +169,7 @@ func (c *ContrasenaController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteContrasena(id); err == nil {
-		c.Data["json"] = "OK"
+		c.Data["json"] = map[string]interface{}{"succes": true, "status":200, "Messaje": "SE ELIMINO EL REGISTRO" , "Data":id}
 	} else {
 		c.Data["json"] = err.Error()
 	}
