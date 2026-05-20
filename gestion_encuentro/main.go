@@ -70,3 +70,4 @@ func main() {
 	beego.Run()
 }
 
+//verificación de funcionalidad correcta del programa GIT.
