@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -36,12 +37,12 @@ func (c *ClasificacionController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddClasificacion(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"success":true, "status": 201, "Message":"EXITOSO", "Data":v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success":false, "status": 400, "Message":"NO SE ENCONTRO NINGUN PARAMETRO PARA CREAR"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success":false, "status": 400, "Message":"Error al deserializar el cuerpo de la solicitud"}
 	}
 	c.ServeJSON()
 }
@@ -58,9 +59,10 @@ func (c *ClasificacionController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetClasificacionById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["json"] = map[string]interface{}{"success":false, "status": 404, "Message":"Dato no encontrado"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success":true, "status": 200, "Message":"EXITOSO", "Data":v}
 	}
 	c.ServeJSON()
 }
@@ -121,9 +123,9 @@ func (c *ClasificacionController) GetAll() {
 
 	l, err := models.GetAllClasificacion(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":"ERROR EN EL SERVICIO GetOne: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	} else {
-		c.Data["json"] = l
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 200, "Messaje":"EXITOSO", "Data":l}
 	}
 	c.ServeJSON()
 }
@@ -142,12 +144,12 @@ func (c *ClasificacionController) Put() {
 	v := models.Clasificacion{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateClasificacionById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{"success":true, "status": 200, "Message":"EXITOSO", "Data":v}
 		} else {
 			c.Data["json"] = err.Error()
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success":false, "status": 400, "Message":"Error al deserializar el cuerpo de la solicitud"}
 	}
 	c.ServeJSON()
 }
@@ -163,7 +165,7 @@ func (c *ClasificacionController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteClasificacion(id); err == nil {
-		c.Data["json"] = "OK"
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 200, "Messaje":"EXITOSO", "Data": id}
 	} else {
 		c.Data["json"] = err.Error()
 	}
