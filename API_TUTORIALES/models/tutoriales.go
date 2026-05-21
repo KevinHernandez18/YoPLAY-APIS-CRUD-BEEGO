@@ -11,14 +11,14 @@ import (
 )
 
 type Tutoriales struct {
-	Id                int       `orm:"column(id_tutoriales);pk"`
+	Id                int       `orm:"column(id_tutoriales);pk;auto"`
 	NombreTutorial    string    `orm:"column(nombre_tutorial)"`
 	LinkTutorial      string    `orm:"column(link_tutorial)"`
 	FechaPublicacion  time.Time `orm:"column(fecha_publicacion);type(date)"`
 	Descripcion       string    `orm:"column(descripcion)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
 }
 
 func (t *Tutoriales) TableName() string {
