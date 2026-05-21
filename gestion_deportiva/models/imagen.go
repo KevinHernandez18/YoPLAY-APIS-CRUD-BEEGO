@@ -42,6 +42,7 @@ func GetImagenById(id int) (v *Imagen, err error) {
 	o := orm.NewOrm()
 	v = &Imagen{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"Torneo")
 		return v, nil
 	}
 	return nil, err
@@ -52,7 +53,7 @@ func GetImagenById(id int) (v *Imagen, err error) {
 func GetAllImagen(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Imagen))
+	qs := o.QueryTable(new(Imagen)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

@@ -44,6 +44,7 @@ func GetIntegrantesById(id int) (v *Integrantes, err error) {
 	o := orm.NewOrm()
 	v = &Integrantes{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"Equipo")
 		return v, nil
 	}
 	return nil, err
@@ -54,7 +55,7 @@ func GetIntegrantesById(id int) (v *Integrantes, err error) {
 func GetAllIntegrantes(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Integrantes))
+	qs := o.QueryTable(new(Integrantes)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
