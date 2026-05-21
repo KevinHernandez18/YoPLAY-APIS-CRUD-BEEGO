@@ -17,9 +17,9 @@ type Usuario struct {
 	NumeroDocumento   string     `orm:"column(numero_documento)"`
 	Email             string     `orm:"column(email)"`
 	Telefono          string     `orm:"column(telefono)"`
-	FechaNacimiento   time.Time  `orm:"column(fecha_nacimiento);type(date)"`
+	FechaNacimiento   time.Time  `orm:"column(fecha_nacimiento);;type(timestamp without time zone)"`
 	IdDocumento       *Documento `orm:"column(id_documento);rel(fk)"`
-	FechaRegistro     time.Time  `orm:"column(fecha_registro);type(date);null"`
+	FechaRegistro     time.Time  `orm:"column(fecha_registro);;type(timestamp without time zone);null"`
 	Activo            bool       `orm:"column(activo)"`
 	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
 	FechaModificacion time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`

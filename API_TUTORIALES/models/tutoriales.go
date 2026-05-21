@@ -14,7 +14,7 @@ type Tutoriales struct {
 	Id                int       `orm:"column(id_tutoriales);pk;auto"`
 	NombreTutorial    string    `orm:"column(nombre_tutorial)"`
 	LinkTutorial      string    `orm:"column(link_tutorial)"`
-	FechaPublicacion  time.Time `orm:"column(fecha_publicacion);type(date)"`
+	FechaPublicacion  time.Time `orm:"column(fecha_publicacion);type(timestamp without time zone);auto_now_add"`
 	Descripcion       string    `orm:"column(descripcion)"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
