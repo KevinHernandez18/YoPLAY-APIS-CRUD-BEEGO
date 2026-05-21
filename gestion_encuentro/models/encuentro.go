@@ -21,8 +21,8 @@ type Encuentro struct {
 	IdEquipo2          int       `orm:"column(id_equipo2)"`
 	ResultadoEquipo2   string    `orm:"column(resultado_equipo2);null"`
 	Activo             bool      `orm:"column(activo)"`
-	FechaCreacion      time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion  time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion      time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion  time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Encuentro) TableName() string {
