@@ -42,7 +42,7 @@ func GetImagenById(id int) (v *Imagen, err error) {
 	o := orm.NewOrm()
 	v = &Imagen{Id: id}
 	if err = o.Read(v); err == nil {
-		o.LoadRelated(v,"Torneo")
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err

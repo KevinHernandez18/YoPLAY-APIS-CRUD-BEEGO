@@ -50,8 +50,8 @@ func GetTorneoById(id int) (v *Torneo, err error) {
 	o := orm.NewOrm()
 	v = &Torneo{Id: id}
 	if err = o.Read(v); err == nil {
-		o.LoadRelated(v,"Imagen")
-		o.LoadRelated(v,"Premiacion")
+		o.LoadRelated(v,"IdImagen")
+		o.LoadRelated(v,"IdPremiacion")
 		return v, nil
 	}
 	return nil, err

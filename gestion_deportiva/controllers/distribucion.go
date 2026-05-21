@@ -10,6 +10,7 @@ import (
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
+// Error
 
 // DistribucionController operations for Distribucion
 type DistribucionController struct {

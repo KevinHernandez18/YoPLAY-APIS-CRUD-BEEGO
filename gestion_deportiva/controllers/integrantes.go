@@ -15,7 +15,7 @@ import (
 type IntegrantesController struct {
 	beego.Controller
 }
-
+// error
 // URLMapping ...
 func (c *IntegrantesController) URLMapping() {
 	c.Mapping("Post", c.Post)

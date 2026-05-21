@@ -15,6 +15,8 @@ import (
 type ClasificacionController struct {
 	beego.Controller
 }
+// Error
+
 
 // URLMapping ...
 func (c *ClasificacionController) URLMapping() {

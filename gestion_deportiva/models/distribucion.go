@@ -42,7 +42,7 @@ func GetDistribucionById(id int) (v *Distribucion, err error) {
 	o := orm.NewOrm()
 	v = &Distribucion{Id: id}
 	if err = o.Read(v); err == nil {
-		o.LoadRelated(v,"Torneo")
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err
