@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"YoPLAY-APIS-CRUD-BEEGO/YoPLAY-APIS-CRUD-BEEGO/controllers"
+	"API_TUTORIALES/controllers"
 
 	beego "github.com/beego/beego/v2/server/web"
 )

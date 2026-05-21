@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"io/ioutil"
+	"strings"
 	"github.com/beego/beego/v2/client/orm/migration"
 )
 
@@ -30,7 +33,6 @@ func (m *CreacionDb_20260521_152844) Up() {
 		fmt.Println(request)
 		m.SQL(request)
 	}
-}
 }
 
 // Reverse the migrations

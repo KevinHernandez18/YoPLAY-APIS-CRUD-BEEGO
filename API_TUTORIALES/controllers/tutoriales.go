@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"YoPLAY-APIS-CRUD-BEEGO/YoPLAY-APIS-CRUD-BEEGO/models"
+	"API_TUTORIALES/models"
 	"encoding/json"
 	"errors"
 	"strconv"
 	"strings"
-
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 

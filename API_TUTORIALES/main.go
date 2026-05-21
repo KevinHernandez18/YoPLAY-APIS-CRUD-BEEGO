@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "YoPLAY-APIS-CRUD-BEEGO/API_USUARIOS/routers"
+	_ "API_TUTORIALES/routers"
 	"fmt"
 
 	// "github.com/beego/beego/v2/server/web"
