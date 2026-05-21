@@ -8,7 +8,7 @@
 package routers
 
 import (
-	":/Users/kevin/Desktop/YoPLAY-APIS-CRUD-BEEGO/gestion_deportiva/controllers"
+	"gestion_deportiva/controllers"
 
 	beego "github.com/beego/beego/v2/server/web"
 )
