@@ -59,7 +59,7 @@ func (c *EncuentroController) GetOne() {
 	v, err := models.GetEncuentroById(id)
 	if err != nil {
 		logs.Error(err)
-		c.Data["json"] = map[string]interface{}{"success":false, "status": 404, "Message":"Encuentro no encontrado"}
+		c.Data["json"] = map[string]interface{}{"success":false, "status": 404, "Message":"Dato no encontrado"}
 	} else {
 		c.Data["json"] = map[string]interface{}{"success":true, "status": 200, "Message":"EXITOSO", "Data":v}
 	}
