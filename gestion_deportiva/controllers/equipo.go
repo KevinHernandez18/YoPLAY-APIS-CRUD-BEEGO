@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	":/Users/kevin/Desktop/YoPLAY-APIS-CRUD-BEEGO/gestion_deportiva/models"
+	"gestion_deportiva/models"
 	"encoding/json"
 	"errors"
 	"strconv"
