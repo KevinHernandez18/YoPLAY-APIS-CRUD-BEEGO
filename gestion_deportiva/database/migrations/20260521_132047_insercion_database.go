@@ -9,20 +9,20 @@ import (
 )
 
 // DO NOT MODIFY
-type CreacionDb_20260521_130537 struct {
+type InsercionDatabase_20260521_132047 struct {
 	migration.Migration
 }
 
 // DO NOT MODIFY
 func init() {
-	m := &CreacionDb_20260521_130537{}
-	m.Created = "20260521_130537"
+	m := &InsercionDatabase_20260521_132047{}
+	m.Created = "20260521_132047"
 
-	migration.Register("CreacionDb_20260521_130537", m)
+	migration.Register("InsercionDatabase_20260521_132047", m)
 }
 
 // Run the migrations
-func (m *CreacionDb_20260521_130537) Up() {
+func (m *InsercionDatabase_20260521_132047) Up() {
 	file, err := ioutil.ReadFile("../scripts/20260521_130537_creacion_db_up.sql")
 
 	if err != nil{
@@ -35,11 +35,10 @@ func (m *CreacionDb_20260521_130537) Up() {
 		fmt.Println(request)
 		m.SQL(request)
 	}
-
 }
 
 // Reverse the migrations
-func (m *CreacionDb_20260521_130537) Down() {
+func (m *InsercionDatabase_20260521_132047) Down() {
 	file, err := ioutil.ReadFile("../scripts/20260521_130537_creacion_db_down.sql")
 
 	if err != nil{
