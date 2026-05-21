@@ -24,8 +24,8 @@ type Torneo struct {
 	IdTipoDistribucion int         `orm:"column(id_tipo_distribucion)"`
 	IdPremiacion       *Premiacion `orm:"column(id_premiacion);rel(fk)"`
 	Activo             bool        `orm:"column(activo);null"`
-	FechaCreacion      time.Time   `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion  time.Time   `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion      time.Time   `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion  time.Time   `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Torneo) TableName() string {

@@ -18,8 +18,8 @@ type Integrantes struct {
 	Correo            string    `orm:"column(correo)"`
 	Telefono          string    `orm:"column(telefono);null"`
 	Activo            bool      `orm:"column(activo);null"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Integrantes) TableName() string {

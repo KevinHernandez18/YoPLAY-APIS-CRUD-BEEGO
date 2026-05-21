@@ -16,8 +16,8 @@ type Imagen struct {
 	UrlImagen         string    `orm:"column(url_imagen)"`
 	TipoImagen        string    `orm:"column(tipo_imagen)"`
 	Activo            bool      `orm:"column(activo);null"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(date)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(date)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(date);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(date);auto_now_add"`
 }
 
 func (t *Imagen) TableName() string {

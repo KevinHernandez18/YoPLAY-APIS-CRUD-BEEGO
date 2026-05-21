@@ -21,8 +21,8 @@ type Clasificacion struct {
 	IdTorneo          *Torneo   `orm:"column(id_torneo);rel(fk)"`
 	IdEquipo          *Equipo   `orm:"column(id_equipo);rel(fk)"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Clasificacion) TableName() string {

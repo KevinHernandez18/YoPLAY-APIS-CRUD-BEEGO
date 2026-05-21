@@ -15,8 +15,8 @@ type Premiacion struct {
 	CantidadPremiacion int       `orm:"column(cantidad_premiacion)"`
 	Descripcion        string    `orm:"column(descripcion)"`
 	Activo             bool      `orm:"column(activo)"`
-	FechaCreacion      time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion  time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion      time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion  time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Premiacion) TableName() string {

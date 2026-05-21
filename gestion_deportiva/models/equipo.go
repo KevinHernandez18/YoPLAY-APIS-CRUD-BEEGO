@@ -17,8 +17,8 @@ type Equipo struct {
 	CantidadJugadores int       `orm:"column(cantidad_jugadores);null"`
 	Region            string    `orm:"column(region)"`
 	Activo            bool      `orm:"column(activo);null"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Equipo) TableName() string {
