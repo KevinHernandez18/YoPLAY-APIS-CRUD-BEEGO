@@ -123,9 +123,15 @@ func (c *ClasificacionController) GetAll() {
 
 	l, err := models.GetAllClasificacion(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = map[string]interface{}{"succes":false, "status": 400, "Messaje":"ERROR EN EL SERVICIO GetOne: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = map[string]interface{}{"succes":true, "status": 200, "Messaje":"EXITOSO", "Data":l}
+
+		if l== nil{
+			c.Data["json"] = map[string]interface{}{"succes":true, "status": 400, "Messaje":"ERROR EN EL SERVICIO GetAll: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+		}else{
+			c.Data["json"] = map[string]interface{}{"succes":true, "status": 200, "Messaje":"EXITOSO", "Data":l}
+		}
+		
 	}
 	c.ServeJSON()
 }

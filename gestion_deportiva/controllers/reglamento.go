@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -36,12 +37,12 @@ func (c *ReglamentoController) Post() {
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddReglamento(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
+			c.Data["json"] = map[string]interface{}{"success":true, "status": 201, "Message":"EXITOSO", "Data":v}
 		} else {
-			c.Data["json"] = err.Error()
+			c.Data["json"] = map[string]interface{}{"success":false, "status": 400, "Message":"NO SE ENCONTRO NINGUN PARAMETRO PARA CREAR"}
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"success":false, "status": 400, "Message":"Error en el servicio Post: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	}
 	c.ServeJSON()
 }
@@ -58,9 +59,10 @@ func (c *ReglamentoController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetReglamentoById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error(err)
+		c.Data["json"] = map[string]interface{}{"success":false, "status": 404, "Message":"Dato no encontrado"}
 	} else {
-		c.Data["json"] = v
+		c.Data["json"] = map[string]interface{}{"success":true, "status": 200, "Message":"EXITOSO", "Data":v}
 	}
 	c.ServeJSON()
 }
@@ -123,7 +125,13 @@ func (c *ReglamentoController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+
+		if l== nil{
+			c.Data["json"] = map[string]interface{}{"succes":true, "status": 400, "Messaje":"ERROR EN EL SERVICIO GetOne: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
+		}else{
+			c.Data["json"] = map[string]interface{}{"succes":true, "status": 200, "Messaje":"EXITOSO", "Data":l}
+		}
+		
 	}
 	c.ServeJSON()
 }
@@ -142,12 +150,12 @@ func (c *ReglamentoController) Put() {
 	v := models.Reglamento{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateReglamentoById(&v); err == nil {
-			c.Data["json"] = "OK"
+			c.Data["json"] = map[string]interface{}{"success":true, "status": 200, "Message":"EXITOSO", "Data":v}
 		} else {
 			c.Data["json"] = err.Error()
 		}
 	} else {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = map[string]interface{}{"succes":true, "status": 400, "Messaje":"ERROR EN EL SERVICIO Put: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 	}
 	c.ServeJSON()
 }
@@ -163,7 +171,7 @@ func (c *ReglamentoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteReglamento(id); err == nil {
-		c.Data["json"] = "OK"
+		c.Data["json"] = map[string]interface{}{"success":true, "status": 200, "Message":"EXITOSO", "Data": id}
 	} else {
 		c.Data["json"] = err.Error()
 	}
