@@ -11,7 +11,7 @@ import (
 )
 
 type Equipo struct {
-	Id                int       `orm:"column(id_equipo);pk"`
+	Id                int       `orm:"column(id_equipo);pk;auto"`
 	NombreEquipo      string    `orm:"column(nombre_equipo)"`
 	Categoria         string    `orm:"column(categoria);null"`
 	CantidadJugadores int       `orm:"column(cantidad_jugadores);null"`

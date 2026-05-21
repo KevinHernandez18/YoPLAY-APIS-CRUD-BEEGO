@@ -11,7 +11,7 @@ import (
 )
 
 type Premiacion struct {
-	Id                 int       `orm:"column(id_premiacion);pk"`
+	Id                 int       `orm:"column(id_premiacion);pk;auto"`
 	CantidadPremiacion int       `orm:"column(cantidad_premiacion)"`
 	Descripcion        string    `orm:"column(descripcion)"`
 	Activo             bool      `orm:"column(activo)"`

@@ -11,7 +11,7 @@ import (
 )
 
 type Grupo struct {
-	Id                int       `orm:"column(id_grupo);pk"`
+	Id                int       `orm:"column(id_grupo);pk;auto"`
 	Grupo             string    `orm:"column(grupo)"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`

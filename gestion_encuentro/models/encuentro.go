@@ -11,7 +11,7 @@ import (
 )
 
 type Encuentro struct {
-	Id                 int       `orm:"column(id_encuentro);pk"`
+	Id                 int       `orm:"column(id_encuentro);pk;auto"`
 	Fecha              time.Time `orm:"column(fecha);type(timestamp without time zone)"`
 	IdTorneo           int       `orm:"column(id_torneo)"`
 	IdTipoDistribucion int       `orm:"column(id_tipo_distribucion)"`

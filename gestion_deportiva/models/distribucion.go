@@ -11,7 +11,7 @@ import (
 )
 
 type Distribucion struct {
-	Id                 int       `orm:"column(id_distribucion);pk"`
+	Id                 int       `orm:"column(id_distribucion);pk;auto"`
 	IdTorneo           *Torneo   `orm:"column(id_torneo);rel(fk)"`
 	IdTipoDistribucion int       `orm:"column(id_tipo_distribucion)"`
 	Confirmacion       bool      `orm:"column(confirmacion)"`

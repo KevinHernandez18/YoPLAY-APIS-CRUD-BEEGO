@@ -11,7 +11,7 @@ import (
 )
 
 type Torneo struct {
-	Id                 int         `orm:"column(id_torneo);pk"`
+	Id                 int         `orm:"column(id_torneo);pk,auto"`
 	IdTipoDeporte      int         `orm:"column(id_tipo_deporte)"`
 	NombreTorneo       string      `orm:"column(nombre_torneo)"`
 	FechaInicio        time.Time   `orm:"column(fecha_inicio);type(date)"`

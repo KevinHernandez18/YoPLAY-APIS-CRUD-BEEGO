@@ -11,7 +11,7 @@ import (
 )
 
 type Clasificacion struct {
-	Id                int       `orm:"column(id_clasificacion);pk"`
+	Id                int       `orm:"column(id_clasificacion);pk;auto"`
 	IdEncuentro       int       `orm:"column(id_encuentro)"`
 	PartidoJugado     int       `orm:"column(partido_jugado);null"`
 	PartidoGanado     int       `orm:"column(partido_ganado);null"`

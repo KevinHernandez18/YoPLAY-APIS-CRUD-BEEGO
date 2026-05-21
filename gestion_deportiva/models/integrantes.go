@@ -11,7 +11,7 @@ import (
 )
 
 type Integrantes struct {
-	Id                int       `orm:"column(id_integrante);pk"`
+	Id                int       `orm:"column(id_integrante);pk;auto"`
 	IdEquipo          *Equipo   `orm:"column(id_equipo);rel(fk)"`
 	Nombre            string    `orm:"column(nombre)"`
 	Posicion          string    `orm:"column(posicion)"`
