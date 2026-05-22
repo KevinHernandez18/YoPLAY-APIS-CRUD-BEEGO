@@ -36,9 +36,6 @@ API REST desarrollada para la gestión de usuarios, tutoriales, gestion de encue
 - Uso de ORM para acceso a datos
 
 ---
-
-# Estructura del Proyecto
-
 # Estructura del Proyecto
 
 ```bash
