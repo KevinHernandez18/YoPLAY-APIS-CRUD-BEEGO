@@ -1,0 +1,635 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /encuentro/:
+    get:
+      tags:
+      - encuentro
+      description: |-
+        get Encuentro
+        <br>
+      operationId: EncuentroController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Encuentro'
+        "403":
+          description: ""
+    post:
+      tags:
+      - encuentro
+      description: |-
+        create Encuentro
+        <br>
+      operationId: EncuentroController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Encuentro content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Encuentro'
+      responses:
+        "201":
+          description: '{int} models.Encuentro'
+        "403":
+          description: body is empty
+  /encuentro/{id}:
+    get:
+      tags:
+      - encuentro
+      description: |-
+        get Encuentro by id
+        <br>
+      operationId: EncuentroController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Encuentro'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - encuentro
+      description: |-
+        update the Encuentro
+        <br>
+      operationId: EncuentroController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Encuentro content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Encuentro'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Encuentro'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - encuentro
+      description: |-
+        delete the Encuentro
+        <br>
+      operationId: EncuentroController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /grupo/:
+    get:
+      tags:
+      - grupo
+      description: |-
+        get Grupo
+        <br>
+      operationId: GrupoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Grupo'
+        "403":
+          description: ""
+    post:
+      tags:
+      - grupo
+      description: |-
+        create Grupo
+        <br>
+      operationId: GrupoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Grupo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Grupo'
+      responses:
+        "201":
+          description: '{int} models.Grupo'
+        "403":
+          description: body is empty
+  /grupo/{id}:
+    get:
+      tags:
+      - grupo
+      description: |-
+        get Grupo by id
+        <br>
+      operationId: GrupoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Grupo'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - grupo
+      description: |-
+        update the Grupo
+        <br>
+      operationId: GrupoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Grupo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Grupo'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Grupo'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - grupo
+      description: |-
+        delete the Grupo
+        <br>
+      operationId: GrupoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /grupo_encuentro/:
+    get:
+      tags:
+      - grupo_encuentro
+      description: |-
+        get GrupoEncuentro
+        <br>
+      operationId: GrupoEncuentroController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.GrupoEncuentro'
+        "403":
+          description: ""
+    post:
+      tags:
+      - grupo_encuentro
+      description: |-
+        create GrupoEncuentro
+        <br>
+      operationId: GrupoEncuentroController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for GrupoEncuentro content
+        required: true
+        schema:
+          $ref: '#/definitions/models.GrupoEncuentro'
+      responses:
+        "201":
+          description: '{int} models.GrupoEncuentro'
+        "403":
+          description: body is empty
+  /grupo_encuentro/{id}:
+    get:
+      tags:
+      - grupo_encuentro
+      description: |-
+        get GrupoEncuentro by id
+        <br>
+      operationId: GrupoEncuentroController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.GrupoEncuentro'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - grupo_encuentro
+      description: |-
+        update the GrupoEncuentro
+        <br>
+      operationId: GrupoEncuentroController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for GrupoEncuentro content
+        required: true
+        schema:
+          $ref: '#/definitions/models.GrupoEncuentro'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.GrupoEncuentro'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - grupo_encuentro
+      description: |-
+        delete the GrupoEncuentro
+        <br>
+      operationId: GrupoEncuentroController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /grupo_equipo/:
+    get:
+      tags:
+      - grupo_equipo
+      description: |-
+        get GrupoEquipo
+        <br>
+      operationId: GrupoEquipoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.GrupoEquipo'
+        "403":
+          description: ""
+    post:
+      tags:
+      - grupo_equipo
+      description: |-
+        create GrupoEquipo
+        <br>
+      operationId: GrupoEquipoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for GrupoEquipo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.GrupoEquipo'
+      responses:
+        "201":
+          description: '{int} models.GrupoEquipo'
+        "403":
+          description: body is empty
+  /grupo_equipo/{id}:
+    get:
+      tags:
+      - grupo_equipo
+      description: |-
+        get GrupoEquipo by id
+        <br>
+      operationId: GrupoEquipoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.GrupoEquipo'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - grupo_equipo
+      description: |-
+        update the GrupoEquipo
+        <br>
+      operationId: GrupoEquipoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for GrupoEquipo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.GrupoEquipo'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.GrupoEquipo'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - grupo_equipo
+      description: |-
+        delete the GrupoEquipo
+        <br>
+      operationId: GrupoEquipoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+definitions:
+  models.Encuentro:
+    title: Encuentro
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FaseTorneo:
+        type: string
+      Fecha:
+        type: string
+        format: datetime
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdEquipo1:
+        type: integer
+        format: int64
+      IdEquipo2:
+        type: integer
+        format: int64
+      IdTipoDistribucion:
+        type: integer
+        format: int64
+      IdTorneo:
+        type: integer
+        format: int64
+      ResultadoEquipo1:
+        type: string
+      ResultadoEquipo2:
+        type: string
+  models.Grupo:
+    title: Grupo
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Grupo:
+        type: string
+      Id:
+        type: integer
+        format: int64
+  models.GrupoEncuentro:
+    title: GrupoEncuentro
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdEncuentro:
+        type: integer
+        format: int64
+      IdGrupo:
+        type: integer
+        format: int64
+  models.GrupoEquipo:
+    title: GrupoEquipo
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Derrotas:
+        type: integer
+        format: int64
+      Empates:
+        type: integer
+        format: int64
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdEquipo:
+        type: integer
+        format: int64
+      IdGrupo:
+        type: integer
+        format: int64
+      PartidosJugados:
+        type: integer
+        format: int64
+      Victorias:
+        type: integer
+        format: int64
+tags:
+- name: grupo
+  description: |
+    GrupoController operations for Grupo
+- name: grupo_equipo
+  description: |
+    GrupoEquipoController operations for GrupoEquipo
+- name: grupo_encuentro
+  description: |
+    GrupoEncuentroController operations for GrupoEncuentro
+- name: encuentro
+  description: |
+    EncuentroController operations for Encuentro
