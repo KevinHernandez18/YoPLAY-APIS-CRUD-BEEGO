@@ -1,0 +1,604 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /reglas/:
+    get:
+      tags:
+      - reglas
+      description: |-
+        get Reglas
+        <br>
+      operationId: ReglasController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Reglas'
+        "403":
+          description: ""
+    post:
+      tags:
+      - reglas
+      description: |-
+        create Reglas
+        <br>
+      operationId: ReglasController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Reglas content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Reglas'
+      responses:
+        "201":
+          description: '{int} models.Reglas'
+        "403":
+          description: body is empty
+  /reglas/{id}:
+    get:
+      tags:
+      - reglas
+      description: |-
+        get Reglas by id
+        <br>
+      operationId: ReglasController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Reglas'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - reglas
+      description: |-
+        update the Reglas
+        <br>
+      operationId: ReglasController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Reglas content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Reglas'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Reglas'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - reglas
+      description: |-
+        delete the Reglas
+        <br>
+      operationId: ReglasController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /tipo_deporte/:
+    get:
+      tags:
+      - tipo_deporte
+      description: |-
+        get TipoDeporte
+        <br>
+      operationId: TipoDeporteController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoDeporte'
+        "403":
+          description: ""
+    post:
+      tags:
+      - tipo_deporte
+      description: |-
+        create TipoDeporte
+        <br>
+      operationId: TipoDeporteController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for TipoDeporte content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TipoDeporte'
+      responses:
+        "201":
+          description: '{int} models.TipoDeporte'
+        "403":
+          description: body is empty
+  /tipo_deporte/{id}:
+    get:
+      tags:
+      - tipo_deporte
+      description: |-
+        get TipoDeporte by id
+        <br>
+      operationId: TipoDeporteController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoDeporte'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - tipo_deporte
+      description: |-
+        update the TipoDeporte
+        <br>
+      operationId: TipoDeporteController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for TipoDeporte content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TipoDeporte'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoDeporte'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - tipo_deporte
+      description: |-
+        delete the TipoDeporte
+        <br>
+      operationId: TipoDeporteController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /tipo_distribucion/:
+    get:
+      tags:
+      - tipo_distribucion
+      description: |-
+        get TipoDistribucion
+        <br>
+      operationId: TipoDistribucionController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoDistribucion'
+        "403":
+          description: ""
+    post:
+      tags:
+      - tipo_distribucion
+      description: |-
+        create TipoDistribucion
+        <br>
+      operationId: TipoDistribucionController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for TipoDistribucion content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TipoDistribucion'
+      responses:
+        "201":
+          description: '{int} models.TipoDistribucion'
+        "403":
+          description: body is empty
+  /tipo_distribucion/{id}:
+    get:
+      tags:
+      - tipo_distribucion
+      description: |-
+        get TipoDistribucion by id
+        <br>
+      operationId: TipoDistribucionController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoDistribucion'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - tipo_distribucion
+      description: |-
+        update the TipoDistribucion
+        <br>
+      operationId: TipoDistribucionController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for TipoDistribucion content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TipoDistribucion'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoDistribucion'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - tipo_distribucion
+      description: |-
+        delete the TipoDistribucion
+        <br>
+      operationId: TipoDistribucionController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /tipo_reglamento/:
+    get:
+      tags:
+      - tipo_reglamento
+      description: |-
+        get TipoReglamento
+        <br>
+      operationId: TipoReglamentoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoReglamento'
+        "403":
+          description: ""
+    post:
+      tags:
+      - tipo_reglamento
+      description: |-
+        create TipoReglamento
+        <br>
+      operationId: TipoReglamentoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for TipoReglamento content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TipoReglamento'
+      responses:
+        "201":
+          description: '{int} models.TipoReglamento'
+        "403":
+          description: body is empty
+  /tipo_reglamento/{id}:
+    get:
+      tags:
+      - tipo_reglamento
+      description: |-
+        get TipoReglamento by id
+        <br>
+      operationId: TipoReglamentoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoReglamento'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - tipo_reglamento
+      description: |-
+        update the TipoReglamento
+        <br>
+      operationId: TipoReglamentoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for TipoReglamento content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TipoReglamento'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TipoReglamento'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - tipo_reglamento
+      description: |-
+        delete the TipoReglamento
+        <br>
+      operationId: TipoReglamentoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+definitions:
+  models.Reglas:
+    title: Reglas
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      CantidadReglas:
+        type: integer
+        format: int64
+      Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+  models.TipoDeporte:
+    title: TipoDeporte
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      NombreDeporte:
+        type: string
+  models.TipoDistribucion:
+    title: TipoDistribucion
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Equipos:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+  models.TipoReglamento:
+    title: TipoReglamento
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdTipoDeporte:
+        type: integer
+        format: int64
+      NombreTipo:
+        type: string
+tags:
+- name: tipo_deporte
+  description: |
+    TipoDeporteController operations for TipoDeporte
+- name: tipo_reglamento
+  description: |
+    TipoReglamentoController operations for TipoReglamento
+- name: tipo_distribucion
+  description: |
+    TipoDistribucionController operations for TipoDistribucion
+- name: reglas
+  description: |
+    ReglasController operations for Reglas
