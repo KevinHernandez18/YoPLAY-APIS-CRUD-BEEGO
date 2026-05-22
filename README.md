@@ -1,2 +1,22 @@
-# YoPLAY-APIS-CRUD-BEEGO
-Este es un proyecto generado con el objetivo de generar todas las API para el proyecto YoPLAY. Cada carpeta contendrá a un API CRUD operacional.contendrá un proyecto 
+# Usuarios_CRUD AND Tutoriales_CRUD
+
+se crea api CRUD para el esquema de usuarios y de tutoriales del proyecto yoplay, se desarrolla en lenguaje de go empleando un framework beeGo
+
+---
+
+## Tecnologías implementadas
+
+- Golang
+
+---
+
+## FRAMEWORK
+
+- BeeGo
+
+---
+
+## Poyecto
+
+- YoPLAY 
+
