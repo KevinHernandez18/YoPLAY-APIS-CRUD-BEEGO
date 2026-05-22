@@ -12,7 +12,7 @@ import (
 
 type GrupoEquipo struct {
 	Id                int       `orm:"column(id_grupo_equipo);pk;auto"`
-	IdGrupo           *Grupo    `orm:"column(id_grupo);rel(fk)"`
+	IdGrupo           int    `orm:"column(id_grupo);"`
 	IdEquipo          int       `orm:"column(id_equipo)"`
 	PartidosJugados   int       `orm:"column(partidos_jugados);null"`
 	Empates           int       `orm:"column(empates);null"`
@@ -45,7 +45,6 @@ func GetGrupoEquipoById(id int) (v *GrupoEquipo, err error) {
 	o := orm.NewOrm()
 	v = &GrupoEquipo{Id: id}
 	if err = o.Read(v); err == nil {
-		o.LoadRelated(v, "IdGrupo")
 		return v, nil
 	}
 	return nil, err
@@ -56,7 +55,7 @@ func GetGrupoEquipoById(id int) (v *GrupoEquipo, err error) {
 func GetAllGrupoEquipo(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(GrupoEquipo)).RelatedSel()
+	qs := o.QueryTable(new(GrupoEquipo))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

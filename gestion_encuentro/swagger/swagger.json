@@ -803,10 +803,12 @@
                     "format": "int64"
                 },
                 "IdEncuentro": {
-                    "$ref": "#/definitions/models.Encuentro"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "IdGrupo": {
-                    "$ref": "#/definitions/models.Grupo"
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -842,7 +844,8 @@
                     "format": "int64"
                 },
                 "IdGrupo": {
-                    "$ref": "#/definitions/models.Grupo"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "PartidosJugados": {
                     "type": "integer",

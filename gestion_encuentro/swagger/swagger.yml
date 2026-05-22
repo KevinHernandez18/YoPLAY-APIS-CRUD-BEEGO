@@ -582,9 +582,11 @@ definitions:
         type: integer
         format: int64
       IdEncuentro:
-        $ref: '#/definitions/models.Encuentro'
+        type: integer
+        format: int64
       IdGrupo:
-        $ref: '#/definitions/models.Grupo'
+        type: integer
+        format: int64
   models.GrupoEquipo:
     title: GrupoEquipo
     type: object
@@ -610,7 +612,8 @@ definitions:
         type: integer
         format: int64
       IdGrupo:
-        $ref: '#/definitions/models.Grupo'
+        type: integer
+        format: int64
       PartidosJugados:
         type: integer
         format: int64
