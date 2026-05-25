@@ -1,0 +1,627 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /contrasena/:
+    get:
+      tags:
+      - contrasena
+      description: |-
+        get Contrasena
+        <br>
+      operationId: ContrasenaController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Contrasena'
+        "403":
+          description: ""
+    post:
+      tags:
+      - contrasena
+      description: |-
+        create Contrasena
+        <br>
+      operationId: ContrasenaController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Contrasena content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Contrasena'
+      responses:
+        "201":
+          description: '{int} models.Contrasena'
+        "403":
+          description: body is empty
+  /contrasena/{id}:
+    get:
+      tags:
+      - contrasena
+      description: |-
+        get Contrasena by id
+        <br>
+      operationId: ContrasenaController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Contrasena'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - contrasena
+      description: |-
+        update the Contrasena
+        <br>
+      operationId: ContrasenaController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Contrasena content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Contrasena'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Contrasena'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - contrasena
+      description: |-
+        delete the Contrasena
+        <br>
+      operationId: ContrasenaController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /documento/:
+    get:
+      tags:
+      - documento
+      description: |-
+        get Documento
+        <br>
+      operationId: DocumentoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Documento'
+        "403":
+          description: ""
+    post:
+      tags:
+      - documento
+      description: |-
+        create Documento
+        <br>
+      operationId: DocumentoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Documento content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Documento'
+      responses:
+        "201":
+          description: '{int} models.Documento'
+        "403":
+          description: body is empty
+  /documento/{id}:
+    get:
+      tags:
+      - documento
+      description: |-
+        get Documento by id
+        <br>
+      operationId: DocumentoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Documento'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - documento
+      description: |-
+        update the Documento
+        <br>
+      operationId: DocumentoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Documento content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Documento'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Documento'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - documento
+      description: |-
+        delete the Documento
+        <br>
+      operationId: DocumentoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /historial_acceso/:
+    get:
+      tags:
+      - historial_acceso
+      description: |-
+        get HistorialAcceso
+        <br>
+      operationId: HistorialAccesoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.HistorialAcceso'
+        "403":
+          description: ""
+    post:
+      tags:
+      - historial_acceso
+      description: |-
+        create HistorialAcceso
+        <br>
+      operationId: HistorialAccesoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for HistorialAcceso content
+        required: true
+        schema:
+          $ref: '#/definitions/models.HistorialAcceso'
+      responses:
+        "201":
+          description: '{int} models.HistorialAcceso'
+        "403":
+          description: body is empty
+  /historial_acceso/{id}:
+    get:
+      tags:
+      - historial_acceso
+      description: |-
+        get HistorialAcceso by id
+        <br>
+      operationId: HistorialAccesoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.HistorialAcceso'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - historial_acceso
+      description: |-
+        update the HistorialAcceso
+        <br>
+      operationId: HistorialAccesoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for HistorialAcceso content
+        required: true
+        schema:
+          $ref: '#/definitions/models.HistorialAcceso'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.HistorialAcceso'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - historial_acceso
+      description: |-
+        delete the HistorialAcceso
+        <br>
+      operationId: HistorialAccesoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /usuario/:
+    get:
+      tags:
+      - usuario
+      description: |-
+        get Usuario
+        <br>
+      operationId: UsuarioController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Usuario'
+        "403":
+          description: ""
+    post:
+      tags:
+      - usuario
+      description: |-
+        create Usuario
+        <br>
+      operationId: UsuarioController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Usuario content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Usuario'
+      responses:
+        "201":
+          description: '{int} models.Usuario'
+        "403":
+          description: body is empty
+  /usuario/{id}:
+    get:
+      tags:
+      - usuario
+      description: |-
+        get Usuario by id
+        <br>
+      operationId: UsuarioController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Usuario'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - usuario
+      description: |-
+        update the Usuario
+        <br>
+      operationId: UsuarioController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Usuario content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Usuario'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Usuario'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - usuario
+      description: |-
+        delete the Usuario
+        <br>
+      operationId: UsuarioController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+definitions:
+  models.Contrasena:
+    title: Contrasena
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Contrasena:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      HashContrasena:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      IdUsuario:
+        $ref: '#/definitions/models.Usuario'
+  models.Documento:
+    title: Documento
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      TipoDocumento:
+        type: string
+  models.HistorialAcceso:
+    title: HistorialAcceso
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Exitoso:
+        type: boolean
+      FalloMotivo:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaIntento:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdContrasena:
+        $ref: '#/definitions/models.Contrasena'
+      IdUsuario:
+        $ref: '#/definitions/models.Usuario'
+      IpOrigen:
+        type: string
+  models.Usuario:
+    title: Usuario
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Apellido:
+        type: string
+      Email:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      FechaNacimiento:
+        type: string
+        format: datetime
+      FechaRegistro:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      IdDocumento:
+        $ref: '#/definitions/models.Documento'
+      Nombre:
+        type: string
+      NumeroDocumento:
+        type: string
+      Telefono:
+        type: string
+tags:
+- name: documento
+  description: |
+    DocumentoController operations for Documento
+- name: usuario
+  description: |
+    UsuarioController operations for Usuario
+- name: contrasena
+  description: |
+    ContrasenaController operations for Contrasena
+- name: historial_acceso
+  description: |
+    HistorialAccesoController operations for HistorialAcceso
