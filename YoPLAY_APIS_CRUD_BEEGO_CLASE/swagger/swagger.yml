@@ -585,8 +585,7 @@ definitions:
         type: integer
         format: int64
       IdTipoDeporte:
-        type: integer
-        format: int64
+        $ref: '#/definitions/models.TipoDeporte'
       NombreTipo:
         type: string
 tags:

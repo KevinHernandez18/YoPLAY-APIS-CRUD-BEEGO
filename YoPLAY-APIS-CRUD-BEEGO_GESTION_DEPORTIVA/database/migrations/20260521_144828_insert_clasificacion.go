@@ -19,7 +19,7 @@ func init() {
 
 // Run the migrations
 func (m *InsertClasificacion_20260521_144828) Up() {
-m.SQL("INSERT INTO gestion_deportiva.clasificacion (id_encuentro,partido_jugado,partido_ganado,partido_empatado,partido_derrota,puntos_partidos,id_torneo,id_equipo) VALUES ('1','10','8','1','1','20','1','1')")
+m.SQL("INSERT INTO gestion_deportiva.clasificacion (id_encuentro,partido_jugado,partido_ganado,partido_empatado,partido_derrota,puntos_partidos) VALUES ('1','10','8','1','1','20')")
 
 }
 
