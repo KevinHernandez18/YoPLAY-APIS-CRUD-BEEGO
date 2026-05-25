@@ -11,18 +11,18 @@ import (
 )
 
 type Clasificacion struct {
-	Id                int       `orm:"column(id_clasificacion);pk:auto"`
-	IdEncuentro       int       `orm:"column(id_encuentro)"`
-	PartidoJugado     int       `orm:"column(partido_jugado);null"`
-	PartidoGanado     int       `orm:"column(partido_ganado);null"`
-	PartidoEmpatado   int       `orm:"column(partido_empatado);null"`
-	PartidoDerrota    int       `orm:"column(partido_derrota);null"`
-	PuntosPartidos    int       `orm:"column(puntos_partidos);null"`
-	IdTorneo          int 		`orm:"column(id_torneo)"`
-	IdEquipo          int  		`orm:"column(id_equipo)"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
+	Id                 int       `orm:"column(id_clasificacion);pk;auto"`
+	IdEncuentro         int       `orm:"column(id_encuentro)"`
+	PartidoJugado       int       `orm:"column(partido_jugado);null"`
+	PartidoGanado       int       `orm:"column(partido_ganado);null"`
+	PartidoEmpatado     int       `orm:"column(partido_empatado);null"`
+	PartidoDerrota      int       `orm:"column(partido_derrota);null"`
+	PuntosPartidos      int       `orm:"column(puntos_partidos);null"`
+	IdTorneo            *Torneo   `orm:"rel(fk);column(id_torneo)rel(fk)"`
+	IdEquipo            *Equipo   `orm:"rel(fk);column(id_equipo)rel(fk)"`
+	Activo              bool      `orm:"column(activo)"`
+	FechaCreacion       time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion   time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
 }
 
 func (t *Clasificacion) TableName() string {
@@ -47,6 +47,8 @@ func GetClasificacionById(id int) (v *Clasificacion, err error) {
 	o := orm.NewOrm()
 	v = &Clasificacion{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
+		o.LoadRelated(v,"IdEquipo")
 		return v, nil
 	}
 	return nil, err

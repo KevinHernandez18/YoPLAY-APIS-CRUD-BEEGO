@@ -13,6 +13,7 @@ import (
 type TipoDeporte struct {
 	Id                int       `orm:"column(id_tipo_deporte);pk;auto"`
 	NombreDeporte     string    `orm:"column(nombre_deporte)"`
+	Descripcion   	  string    `orm:"column(descripcion)"`
 	Activo            bool      `orm:"column(activo);null"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone):;auto_now"`
 	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);;auto_now"`

@@ -12,7 +12,7 @@ import (
 
 type Integrantes struct {
 	Id                int       `orm:"column(id_integrante);pk:auto"`
-	IdEquipo          int   	`orm:"column(id_equipo)"`
+	IdEquipo          *Equipo  	`orm:"column(id_equipo)rel(fk)"`
 	Nombre            string    `orm:"column(nombre)"`
 	Posicion          string    `orm:"column(posicion)"`
 	Correo            string    `orm:"column(correo)"`
@@ -44,6 +44,7 @@ func GetIntegrantesById(id int) (v *Integrantes, err error) {
 	o := orm.NewOrm()
 	v = &Integrantes{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdEquipo")
 		return v, nil
 	}
 	return nil, err

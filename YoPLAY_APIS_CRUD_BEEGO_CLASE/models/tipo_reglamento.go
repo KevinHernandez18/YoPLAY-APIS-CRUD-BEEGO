@@ -11,13 +11,13 @@ import (
 )
 
 type TipoReglamento struct {
-	Id                int          `orm:"column(id_tipo_reglamento);pk;auto"`
-	IdTipoDeporte     int  `orm:"column(id_tipo_deporte)"`
-	NombreTipo        string       `orm:"column(nombre_tipo)"`
-	Descripcion       string       `orm:"column(descripcion)"`
-	Activo            bool         `orm:"column(activo)"`
-	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now"`
-	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`
+	Id                int            `orm:"column(id_tipo_reglamento);pk;auto"`
+	TipoDeporte       *TipoDeporte   `orm:"rel(fk);column(id_tipo_deporte)"`
+	NombreTipo        string         `orm:"column(nombre_tipo)"`
+	Descripcion       string         `orm:"column(descripcion)"`
+	Activo            bool           `orm:"column(activo)"`
+	FechaCreacion     time.Time      `orm:"column(fecha_creacion);auto_now_add"`
+	FechaModificacion time.Time      `orm:"column(fecha_modificacion);auto_now"`
 }
 
 func (t *TipoReglamento) TableName() string {
@@ -42,11 +42,11 @@ func GetTipoReglamentoById(id int) (v *TipoReglamento, err error) {
 	o := orm.NewOrm()
 	v = &TipoReglamento{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"TipoDeporte")
 		return v, nil
 	}
 	return nil, err
 }
-
 // GetAllTipoReglamento retrieves all TipoReglamento matches certain condition. Returns empty list if
 // no records exist
 func GetAllTipoReglamento(query map[string]string, fields []string, sortby []string, order []string,

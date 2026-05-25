@@ -12,7 +12,7 @@ import (
 
 type Reglamento struct {
 	Id                int       `orm:"column(id_reglamento);pk:auto"`
-	IdTorneo          int   `orm:"column(id_torneo)"`
+	IdTorneo          *Torneo  	`orm:"column(id_torneo)rel(fk)"`
 	IdTipoReglamento  int       `orm:"column(id_tipo_reglamento)"`
 	IdReglas          int       `orm:"column(id_reglas)"`
 	IdTipoDeporte     int       `orm:"column(id_tipo_deporte)"`
@@ -44,6 +44,7 @@ func GetReglamentoById(id int) (v *Reglamento, err error) {
 	o := orm.NewOrm()
 	v = &Reglamento{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err

@@ -19,7 +19,7 @@ func init() {
 
 // Run the migrations
 func (m *InsertHistorialtorneos_20260521_144848) Up() {
-m.SQL("INSERT INTO gestion_deportiva.historialtorneos (nombre_torneo,id_torneo,id_usuario,deporte,reglamento,equipos,id_tipo_distribucion,distribucion) VALUES ('fifa','1','1','fultbol','fifa','8','1','ramas')")
+m.SQL("INSERT INTO gestion_deportiva.historialtorneos (nombre_torneo,id_usuario,deporte,reglamento,equipos,id_tipo_distribucion,distribucion) VALUES ('fifa','1','fultbol','fifa','8','1','ramas')")
 
 }
 

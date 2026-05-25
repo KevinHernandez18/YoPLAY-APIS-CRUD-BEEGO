@@ -22,7 +22,7 @@ type Torneo struct {
 	FechaFase          string      `orm:"column(fecha_fase);null"`
 	CantidadEquipo     int         `orm:"column(cantidad_equipo)"`
 	IdTipoDistribucion int         `orm:"column(id_tipo_distribucion)"`
-	IdPremiacion       int 		   `orm:"column(id_premiacion)"`
+	IdPremiacion       *Premiacion `orm:"column(id_premiacion)rel(fk)"`
 	Activo             bool        `orm:"column(activo);null"`
 	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
 	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
@@ -50,6 +50,7 @@ func GetTorneoById(id int) (v *Torneo, err error) {
 	o := orm.NewOrm()
 	v = &Torneo{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdPremiacion")
 		return v, nil
 	}
 	return nil, err

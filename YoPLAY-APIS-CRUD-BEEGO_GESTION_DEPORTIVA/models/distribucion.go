@@ -12,7 +12,7 @@ import (
 
 type Distribucion struct {
 	Id                 int       `orm:"column(id_distribucion);pk:auto"`
-	IdTorneo           int  `orm:"column(id_torneo)"`
+	IdTorneo           *Torneo  `orm:"column(id_torneo)rel(fk)"`
 	IdTipoDistribucion int       `orm:"column(id_tipo_distribucion)"`
 	Confirmacion       bool      `orm:"column(confirmacion)"`
 	Activo             bool      `orm:"column(activo)"`
@@ -42,6 +42,7 @@ func GetDistribucionById(id int) (v *Distribucion, err error) {
 	o := orm.NewOrm()
 	v = &Distribucion{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err

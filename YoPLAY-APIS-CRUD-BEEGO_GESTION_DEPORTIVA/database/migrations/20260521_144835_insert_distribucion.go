@@ -19,12 +19,12 @@ func init() {
 
 // Run the migrations
 func (m *InsertDistribucion_20260521_144835) Up() {
-m.SQL("INSERT INTO gestion_deportiva.distribucion (id_torneo,id_tipo_distribucion,confirmacion) VALUES ('1','1','true')")
+m.SQL("INSERT INTO gestion_deportiva.distribucion (id_tipo_distribucion,confirmacion) VALUES ('1','true')")
 
 }
 
 // Reverse the migrations
 func (m *InsertDistribucion_20260521_144835) Down() {
-m.SQL("DELETE FROM gestion_deportiva.distribucion WHERE id_torneo='1'")
+m.SQL("DELETE FROM gestion_deportiva.distribucion WHERE id_tipo_distribucon='1'")
 
 }

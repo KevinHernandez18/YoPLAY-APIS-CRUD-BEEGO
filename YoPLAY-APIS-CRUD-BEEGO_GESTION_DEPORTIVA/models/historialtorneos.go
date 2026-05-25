@@ -13,7 +13,7 @@ import (
 type Historialtorneos struct {
 	Id                 int       `orm:"column(id_historial_torneo);pk:auto"`
 	NombreTorneo       string    `orm:"column(nombre_torneo)"`
-	IdTorneo           int   `orm:"column(id_torneo)"`
+	IdTorneo           *Torneo   `orm:"column(id_torneo)rel(fk)"`
 	IdUsuario          int       `orm:"column(id_usuario)"`
 	Deporte            string    `orm:"column(deporte)"`
 	Reglamento         string    `orm:"column(reglamento);null"`
@@ -47,6 +47,7 @@ func GetHistorialtorneosById(id int) (v *Historialtorneos, err error) {
 	o := orm.NewOrm()
 	v = &Historialtorneos{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err

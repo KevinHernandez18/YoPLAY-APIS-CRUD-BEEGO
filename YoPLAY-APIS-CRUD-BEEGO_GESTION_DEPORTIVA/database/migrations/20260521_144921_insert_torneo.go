@@ -19,12 +19,12 @@ func init() {
 
 // Run the migrations
 func (m *InsertTorneo_20260521_144921) Up() {
-m.SQL("INSERT INTO gestion_deportiva.torneo (id_tipo_deporte,nombre_torneo,fecha_inicio,fecha_fin,ubicacion,objetivo,id_imagen,fecha_fase,cantidad_equipo,id_tipo_distribucion,id_premiacion) VALUES ('1','cascada','12/06/2026','12/08/2026','yopal','somentar deporte','1','12/10/2027','8','1','1')")
+m.SQL("INSERT INTO gestion_deportiva.torneo (id_tipo_deporte,nombre_torneo,fecha_inicio,fecha_fin,ubicacion,objetivo,fecha_fase,cantidad_equipo,id_tipo_distribucion) VALUES ('1','cascada','12/06/2026','12/08/2026','yopal','somentar deporte','12/10/2027','8','1')")
 
 }
 
 // Reverse the migrations
 func (m *InsertTorneo_20260521_144921) Down() {
-m.SQL("DELETE FROM gestion_deportiva.torneo WHERE id_torneo='1'")
+m.SQL("DELETE FROM gestion_deportiva.torneo WHERE id_tipo_deporte='1'")
 
 }
