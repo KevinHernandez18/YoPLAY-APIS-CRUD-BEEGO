@@ -12,7 +12,7 @@ import (
 
 type TipoReglamento struct {
 	Id                int            `orm:"column(id_tipo_reglamento);pk;auto"`
-	TipoDeporte       *TipoDeporte   `orm:"rel(fk);column(id_tipo_deporte)"`
+	TipoDeporte       *TipoDeporte   `orm:"rel(fk);column(id_tipo_deporte);on delete (cascade)"`
 	NombreTipo        string         `orm:"column(nombre_tipo)"`
 	Descripcion       string         `orm:"column(descripcion)"`
 	Activo            bool           `orm:"column(activo)"`
@@ -52,7 +52,7 @@ func GetTipoReglamentoById(id int) (v *TipoReglamento, err error) {
 func GetAllTipoReglamento(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(TipoReglamento))
+	qs := o.QueryTable(new(TipoReglamento)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

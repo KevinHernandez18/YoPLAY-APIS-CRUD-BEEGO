@@ -22,7 +22,7 @@ type Torneo struct {
 	FechaFase          string      `orm:"column(fecha_fase);null"`
 	CantidadEquipo     int         `orm:"column(cantidad_equipo)"`
 	IdTipoDistribucion int         `orm:"column(id_tipo_distribucion)"`
-	IdPremiacion       *Premiacion `orm:"column(id_premiacion)rel(fk)"`
+	IdPremiacion       *Premiacion `orm:"column(id_premiacion)rel(fk);on delete (cascade)"`
 	Activo             bool        `orm:"column(activo);null"`
 	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
 	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
@@ -61,7 +61,7 @@ func GetTorneoById(id int) (v *Torneo, err error) {
 func GetAllTorneo(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Torneo))
+	qs := o.QueryTable(new(Torneo)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

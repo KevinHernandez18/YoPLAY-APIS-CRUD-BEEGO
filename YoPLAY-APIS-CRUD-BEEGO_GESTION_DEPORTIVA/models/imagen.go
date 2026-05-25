@@ -12,7 +12,7 @@ import (
 
 type Imagen struct {
 	Id                int       `orm:"column(id_imagen);pk:auto"`
-	IdTorneo          *Torneo  	`orm:"column(id_torneo)rel(fk)"`
+	IdTorneo          *Torneo  	`orm:"column(id_torneo)rel(fk);on delete (cascade)"`
 	UrlImagen         string    `orm:"column(url_imagen)"`
 	TipoImagen        string    `orm:"column(tipo_imagen)"`
 	Activo            bool      `orm:"column(activo);null"`
@@ -52,7 +52,7 @@ func GetImagenById(id int) (v *Imagen, err error) {
 func GetAllImagen(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Imagen))
+	qs := o.QueryTable(new(Imagen)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

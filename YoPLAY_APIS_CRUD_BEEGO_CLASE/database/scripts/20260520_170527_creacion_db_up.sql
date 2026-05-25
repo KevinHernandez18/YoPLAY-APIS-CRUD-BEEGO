@@ -44,5 +44,5 @@ CREATE TABLE clase.tipo_reglamento(
     fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_tipo_reglamento_tipo_deporte
         FOREIGN KEY (id_tipo_deporte)
-        REFERENCES clase.tipo_deporte(id_tipo_deporte)
+        REFERENCES clase.tipo_deporte(id_tipo_deporte) ON DELETE CASCADE
 );

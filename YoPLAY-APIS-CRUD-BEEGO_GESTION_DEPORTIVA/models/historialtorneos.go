@@ -13,7 +13,7 @@ import (
 type Historialtorneos struct {
 	Id                 int       `orm:"column(id_historial_torneo);pk:auto"`
 	NombreTorneo       string    `orm:"column(nombre_torneo)"`
-	IdTorneo           *Torneo   `orm:"column(id_torneo)rel(fk)"`
+	IdTorneo           *Torneo   `orm:"column(id_torneo)rel(fk);on delete (cascade)"`
 	IdUsuario          int       `orm:"column(id_usuario)"`
 	Deporte            string    `orm:"column(deporte)"`
 	Reglamento         string    `orm:"column(reglamento);null"`
@@ -58,7 +58,7 @@ func GetHistorialtorneosById(id int) (v *Historialtorneos, err error) {
 func GetAllHistorialtorneos(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Historialtorneos))
+	qs := o.QueryTable(new(Historialtorneos)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

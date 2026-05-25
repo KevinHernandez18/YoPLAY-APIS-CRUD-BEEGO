@@ -45,7 +45,7 @@ CREATE TABLE gestion_deportiva.torneo (
 
     CONSTRAINT fk_torneo_premiacion
         FOREIGN KEY (id_premiacion)
-        REFERENCES gestion_deportiva.premiacion(id_premiacion)
+        REFERENCES gestion_deportiva.premiacion(id_premiacion) ON DELETE CASCADE
 );
 
 
@@ -61,7 +61,7 @@ CREATE TABLE gestion_deportiva.imagen (
 
     CONSTRAINT fk_imagen_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo)
+        REFERENCES gestion_deportiva.torneo(id_torneo) ON DELETE CASCADE
 );
 
 
@@ -76,7 +76,7 @@ CREATE TABLE gestion_deportiva.distribucion (
 
     CONSTRAINT fk_distribucion_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo)
+        REFERENCES gestion_deportiva.torneo(id_torneo) ON DELETE CASCADE
 );
 
 
@@ -94,7 +94,7 @@ CREATE TABLE gestion_deportiva.reglamento (
 
     CONSTRAINT fk_reglamento_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo)
+        REFERENCES gestion_deportiva.torneo(id_torneo) ON DELETE CASCADE
 );
 
 
@@ -113,7 +113,7 @@ CREATE TABLE gestion_deportiva.integrantes (
 
     CONSTRAINT fk_integrante_equipo
         FOREIGN KEY (id_equipo)
-        REFERENCES gestion_deportiva.equipo(id_equipo)
+        REFERENCES gestion_deportiva.equipo(id_equipo) ON DELETE CASCADE
 );
 
 
@@ -134,11 +134,11 @@ CREATE TABLE gestion_deportiva.clasificacion (
 
     CONSTRAINT fk_clasificacion_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo),
+        REFERENCES gestion_deportiva.torneo(id_torneo)ON DELETE CASCADE,
 
     CONSTRAINT fk_clasificacion_equipo
         FOREIGN KEY (id_equipo)
-        REFERENCES gestion_deportiva.equipo(id_equipo)
+        REFERENCES gestion_deportiva.equipo(id_equipo)ON DELETE CASCADE
 );
 
 
@@ -159,5 +159,5 @@ CREATE TABLE gestion_deportiva.historialtorneos (
 
     CONSTRAINT fk_historial_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo)
+        REFERENCES gestion_deportiva.torneo(id_torneo)ON DELETE CASCADE
 );
