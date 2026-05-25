@@ -22,7 +22,7 @@ type Torneo struct {
 	FechaFase          string      `orm:"column(fecha_fase);null"`
 	CantidadEquipo     int         `orm:"column(cantidad_equipo)"`
 	IdTipoDistribucion int         `orm:"column(id_tipo_distribucion)"`
-	IdPremiacion       *Premiacion `orm:"column(id_premiacion)rel(fk)"`
+	IdPremiacion       *Premiacion `orm:"column(id_premiacion)rel(fk);on delete (cascade)"`
 	Activo             bool        `orm:"column(activo);null"`
 	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
 	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`

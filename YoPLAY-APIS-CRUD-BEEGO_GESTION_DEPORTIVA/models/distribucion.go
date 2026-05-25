@@ -12,7 +12,7 @@ import (
 
 type Distribucion struct {
 	Id                 int       `orm:"column(id_distribucion);pk:auto"`
-	IdTorneo           *Torneo  `orm:"column(id_torneo)rel(fk)"`
+	IdTorneo           *Torneo  `orm:"column(id_torneo)rel(fk);on delete (cascade)"`
 	IdTipoDistribucion int       `orm:"column(id_tipo_distribucion)"`
 	Confirmacion       bool      `orm:"column(confirmacion)"`
 	Activo             bool      `orm:"column(activo)"`

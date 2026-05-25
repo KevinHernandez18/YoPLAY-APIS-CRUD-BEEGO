@@ -18,8 +18,8 @@ type Clasificacion struct {
 	PartidoEmpatado     int       `orm:"column(partido_empatado);null"`
 	PartidoDerrota      int       `orm:"column(partido_derrota);null"`
 	PuntosPartidos      int       `orm:"column(puntos_partidos);null"`
-	IdTorneo            *Torneo   `orm:"rel(fk);column(id_torneo)rel(fk)"`
-	IdEquipo            *Equipo   `orm:"rel(fk);column(id_equipo)rel(fk)"`
+	IdTorneo            *Torneo   `orm:"rel(fk);column(id_torneo)rel(fk);on delete (cascade)"`
+	IdEquipo            *Equipo   `orm:"rel(fk);column(id_equipo)rel(fk);on delete (cascade)"`
 	Activo              bool      `orm:"column(activo)"`
 	FechaCreacion       time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
 	FechaModificacion   time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`

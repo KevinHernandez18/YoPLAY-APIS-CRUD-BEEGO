@@ -12,7 +12,7 @@ import (
 
 type Imagen struct {
 	Id                int       `orm:"column(id_imagen);pk:auto"`
-	IdTorneo          *Torneo  	`orm:"column(id_torneo)rel(fk)"`
+	IdTorneo          *Torneo  	`orm:"column(id_torneo)rel(fk);on delete (cascade)"`
 	UrlImagen         string    `orm:"column(url_imagen)"`
 	TipoImagen        string    `orm:"column(tipo_imagen)"`
 	Activo            bool      `orm:"column(activo);null"`

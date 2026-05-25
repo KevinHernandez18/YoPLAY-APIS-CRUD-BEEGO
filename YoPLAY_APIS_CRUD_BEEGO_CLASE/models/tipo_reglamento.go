@@ -12,7 +12,7 @@ import (
 
 type TipoReglamento struct {
 	Id                int            `orm:"column(id_tipo_reglamento);pk;auto"`
-	TipoDeporte       *TipoDeporte   `orm:"rel(fk);column(id_tipo_deporte)"`
+	TipoDeporte       *TipoDeporte   `orm:"rel(fk);column(id_tipo_deporte);on delete (cascade)"`
 	NombreTipo        string         `orm:"column(nombre_tipo)"`
 	Descripcion       string         `orm:"column(descripcion)"`
 	Activo            bool           `orm:"column(activo)"`
