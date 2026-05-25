@@ -44,6 +44,7 @@ func GetReglamentoById(id int) (v *Reglamento, err error) {
 	o := orm.NewOrm()
 	v = &Reglamento{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err

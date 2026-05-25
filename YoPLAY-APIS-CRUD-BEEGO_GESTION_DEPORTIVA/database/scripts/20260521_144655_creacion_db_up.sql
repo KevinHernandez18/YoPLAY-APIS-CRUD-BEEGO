@@ -38,7 +38,7 @@ CREATE TABLE gestion_deportiva.torneo (
     fecha_fase             VARCHAR(100),
     cantidad_equipo        INTEGER NOT NULL,
     id_tipo_distribucion   INTEGER NOT NULL,
-    id_premiacion          INTEGER,
+    id_premiacion          INTEGER NOT NULL,
     activo                 BOOLEAN DEFAULT TRUE,
     fecha_creacion         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

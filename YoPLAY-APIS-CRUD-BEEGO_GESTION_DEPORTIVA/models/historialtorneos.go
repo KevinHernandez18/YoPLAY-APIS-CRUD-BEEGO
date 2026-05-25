@@ -47,6 +47,7 @@ func GetHistorialtorneosById(id int) (v *Historialtorneos, err error) {
 	o := orm.NewOrm()
 	v = &Historialtorneos{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err

@@ -44,6 +44,7 @@ func GetIntegrantesById(id int) (v *Integrantes, err error) {
 	o := orm.NewOrm()
 	v = &Integrantes{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdEquipo")
 		return v, nil
 	}
 	return nil, err

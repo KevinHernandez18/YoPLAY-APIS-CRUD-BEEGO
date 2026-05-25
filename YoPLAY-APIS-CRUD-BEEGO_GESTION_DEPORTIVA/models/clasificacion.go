@@ -47,6 +47,8 @@ func GetClasificacionById(id int) (v *Clasificacion, err error) {
 	o := orm.NewOrm()
 	v = &Clasificacion{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
+		o.LoadRelated(v,"IdEquipo")
 		return v, nil
 	}
 	return nil, err

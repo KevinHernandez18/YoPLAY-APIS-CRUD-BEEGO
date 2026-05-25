@@ -42,11 +42,11 @@ func GetImagenById(id int) (v *Imagen, err error) {
 	o := orm.NewOrm()
 	v = &Imagen{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"IdTorneo")
 		return v, nil
 	}
 	return nil, err
 }
-
 // GetAllImagen retrieves all Imagen matches certain condition. Returns empty list if
 // no records exist
 func GetAllImagen(query map[string]string, fields []string, sortby []string, order []string,

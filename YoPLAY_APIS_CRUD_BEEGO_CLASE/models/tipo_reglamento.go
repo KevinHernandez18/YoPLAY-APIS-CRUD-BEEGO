@@ -42,11 +42,11 @@ func GetTipoReglamentoById(id int) (v *TipoReglamento, err error) {
 	o := orm.NewOrm()
 	v = &TipoReglamento{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v,"TipoDeporte")
 		return v, nil
 	}
 	return nil, err
 }
-
 // GetAllTipoReglamento retrieves all TipoReglamento matches certain condition. Returns empty list if
 // no records exist
 func GetAllTipoReglamento(query map[string]string, fields []string, sortby []string, order []string,
