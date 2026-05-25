@@ -717,7 +717,7 @@
                     "type": "boolean"
                 },
                 "FaseTorneo": {
-                    "type": "string"
+                    "$ref": "#/definitions/models.FaseTorneo"
                 },
                 "Fecha": {
                     "type": "string",
@@ -752,12 +752,24 @@
                     "format": "int64"
                 },
                 "ResultadoEquipo1": {
-                    "type": "string"
+                    "$ref": "#/definitions/models.ResultadoTipo"
                 },
                 "ResultadoEquipo2": {
-                    "type": "string"
+                    "$ref": "#/definitions/models.ResultadoTipo"
                 }
             }
+        },
+        "models.FaseTorneo": {
+            "title": "FaseTorneo",
+            "type": "string",
+            "enum": [
+                "FaseTorneoGrupos = \"Grupos\"",
+                "FaseTorneoOctavos = \"Octavos\"",
+                "FaseTorneoCuartos = \"Cuartos\"",
+                "FaseTorneoSemifinal = \"Semifinal\"",
+                "FaseTorneoFinal = \"Final\""
+            ],
+            "example": "Grupos"
         },
         "models.Grupo": {
             "title": "Grupo",
@@ -803,12 +815,10 @@
                     "format": "int64"
                 },
                 "IdEncuentro": {
-                    "type": "integer",
-                    "format": "int64"
+                    "$ref": "#/definitions/models.Encuentro"
                 },
                 "IdGrupo": {
-                    "type": "integer",
-                    "format": "int64"
+                    "$ref": "#/definitions/models.Grupo"
                 }
             }
         },
@@ -844,8 +854,7 @@
                     "format": "int64"
                 },
                 "IdGrupo": {
-                    "type": "integer",
-                    "format": "int64"
+                    "$ref": "#/definitions/models.Grupo"
                 },
                 "PartidosJugados": {
                     "type": "integer",
@@ -856,6 +865,16 @@
                     "format": "int64"
                 }
             }
+        },
+        "models.ResultadoTipo": {
+            "title": "ResultadoTipo",
+            "type": "string",
+            "enum": [
+                "ResultadoTipoGanador = \"Ganador\"",
+                "ResultadoTipoPerdedor = \"Perdedor\"",
+                "ResultadoTipoEmpate = \"Empate\""
+            ],
+            "example": "Ganador"
         }
     },
     "tags": [

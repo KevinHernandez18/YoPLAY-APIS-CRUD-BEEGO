@@ -12,8 +12,8 @@ import (
 
 type GrupoEncuentro struct {
 	Id                int        `orm:"column(id_grupo_encuentro);pk;auto"`
-	IdGrupo           int     	`orm:"column(id_grupo)"`
-	IdEncuentro       int 		`orm:"column(id_encuentro)"`
+	IdGrupo           *Grupo     `orm:"column(id_grupo);rel(fk);on_delete(cascade)"`
+	IdEncuentro       *Encuentro `orm:"column(id_encuentro);rel(fk);on_delete(cascade)"`
 	Activo            bool       `orm:"column(activo)"`
 	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
 	FechaModificacion time.Time  `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
@@ -41,6 +41,8 @@ func GetGrupoEncuentroById(id int) (v *GrupoEncuentro, err error) {
 	o := orm.NewOrm()
 	v = &GrupoEncuentro{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdGrupo")
+		o.LoadRelated(v, "IdEncuentro")
 		return v, nil
 	}
 	return nil, err
@@ -51,7 +53,7 @@ func GetGrupoEncuentroById(id int) (v *GrupoEncuentro, err error) {
 func GetAllGrupoEncuentro(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(GrupoEncuentro))
+	qs := o.QueryTable(new(GrupoEncuentro)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

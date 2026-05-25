@@ -6,23 +6,39 @@ import (
 	"reflect"
 	"strings"
 	"time"
-	
+
 	"github.com/beego/beego/v2/client/orm"
 )
 
+type ResultadoTipo string
+
+type FaseTorneo string
+
+const (
+	ResultadoTipoGanador  ResultadoTipo = "Ganador"
+	ResultadoTipoPerdedor ResultadoTipo = "Perdedor"
+	ResultadoTipoEmpate   ResultadoTipo = "Empate"
+
+	FaseTorneoGrupos    FaseTorneo = "Grupos"
+	FaseTorneoOctavos   FaseTorneo = "Octavos"
+	FaseTorneoCuartos   FaseTorneo = "Cuartos"
+	FaseTorneoSemifinal FaseTorneo = "Semifinal"
+	FaseTorneoFinal     FaseTorneo = "Final"
+)
+
 type Encuentro struct {
-	Id                 int       `orm:"column(id_encuentro);pk;auto"`
-	Fecha              time.Time `orm:"column(fecha);type(timestamp without time zone)"`
-	IdTorneo           int       `orm:"column(id_torneo)"`
-	IdTipoDistribucion int       `orm:"column(id_tipo_distribucion)"`
-	FaseTorneo         string    `orm:"column(fase_torneo);null"`
-	IdEquipo1          int       `orm:"column(id_equipo1)"`
-	ResultadoEquipo1   string    `orm:"column(resultado_equipo1);null"`
-	IdEquipo2          int       `orm:"column(id_equipo2)"`
-	ResultadoEquipo2   string    `orm:"column(resultado_equipo2);null"`
-	Activo             bool      `orm:"column(activo)"`
-	FechaCreacion      time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
-	FechaModificacion  time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
+	Id                 int           `orm:"column(id_encuentro);pk;auto"`
+	Fecha              time.Time     `orm:"column(fecha);type(timestamp without time zone)"`
+	IdTorneo           int           `orm:"column(id_torneo)"`
+	IdTipoDistribucion int           `orm:"column(id_tipo_distribucion)"`
+	FaseTorneo         FaseTorneo    `orm:"column(fase_torneo);type(fase_torneo);null"`
+	IdEquipo1          int           `orm:"column(id_equipo1)"`
+	ResultadoEquipo1   ResultadoTipo `orm:"column(resultado_equipo1);type(resultado_tipo);null"`
+	IdEquipo2          int           `orm:"column(id_equipo2)"`
+	ResultadoEquipo2   ResultadoTipo `orm:"column(resultado_equipo2);type(resultado_tipo);null"`
+	Activo             bool          `orm:"column(activo)"`
+	FechaCreacion      time.Time     `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
+	FechaModificacion  time.Time     `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
 }
 
 func (t *Encuentro) TableName() string {
