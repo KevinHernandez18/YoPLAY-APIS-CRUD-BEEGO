@@ -3,7 +3,7 @@ package controllers
 import (
 	"YoPLAY-APIS-CRUD-BEEGO/API_USUARIOS/models"
 	"encoding/json"
-	"errors"
+	
 	"strconv"
 	"strings"
 
@@ -110,7 +110,7 @@ func (c *UsuarioController) GetAll() {
 		for _, cond := range strings.Split(v, ",") {
 			kv := strings.SplitN(cond, ":", 2)
 			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.Data["json"] = map[string]interface{}{"succes":false,"status":400, "Messaje":"ERROR EN EL SERVICIO DE GetAll: LA SOLICITUD CONTIENE UN PARAMETRO INCORRECTO O NO EXISTE NINGUN REGISTRO"}
 				c.ServeJSON()
 				return
 			}
