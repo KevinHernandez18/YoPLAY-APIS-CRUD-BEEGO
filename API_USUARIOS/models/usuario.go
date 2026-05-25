@@ -18,7 +18,7 @@ type Usuario struct {
 	Email             string     `orm:"column(email)"`
 	Telefono          string     `orm:"column(telefono)"`
 	FechaNacimiento   time.Time  `orm:"column(fecha_nacimiento);;type(timestamp without time zone)"`
-	IdDocumento       *Documento `orm:"column(id_documento);rel(fk)"`
+	IdDocumento       *Documento `orm:"column(id_documento);rel(fk);on_delete(cascade)"`
 	FechaRegistro     time.Time  `orm:"column(fecha_registro);;type(timestamp without time zone);null"`
 	Activo            bool       `orm:"column(activo)"`
 	FechaCreacion     time.Time  `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
@@ -47,6 +47,7 @@ func GetUsuarioById(id int) (v *Usuario, err error) {
 	o := orm.NewOrm()
 	v = &Usuario{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdDocumento")
 		return v, nil
 	}
 	return nil, err
@@ -57,7 +58,7 @@ func GetUsuarioById(id int) (v *Usuario, err error) {
 func GetAllUsuario(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Usuario))
+	qs := o.QueryTable(new(Usuario)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

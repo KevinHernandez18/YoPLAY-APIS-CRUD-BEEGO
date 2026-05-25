@@ -16,8 +16,8 @@ type HistorialAcceso struct {
 	Exitoso           bool        `orm:"column(exitoso)"`
 	IpOrigen          string      `orm:"column(ip_origen);null"`
 	FalloMotivo       string      `orm:"column(fallo_motivo);null"`
-	IdUsuario         *Usuario    `orm:"column(id_usuario);rel(fk)"`
-	IdContrasena      *Contrasena `orm:"column(id_contrasena);rel(fk)"`
+	IdUsuario         *Usuario    `orm:"column(id_usuario);rel(fk);on_delete(cascade)"`
+	IdContrasena      *Contrasena `orm:"column(id_contrasena);rel(fk);on_delete(cascade)"`
 	Activo            bool        `orm:"column(activo)"`
 	FechaCreacion     time.Time   `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
 	FechaModificacion time.Time   `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
@@ -45,6 +45,8 @@ func GetHistorialAccesoById(id int) (v *HistorialAcceso, err error) {
 	o := orm.NewOrm()
 	v = &HistorialAcceso{Id: id}
 	if err = o.Read(v); err == nil {
+		o.LoadRelated(v, "IdUsuario")
+		o.LoadRelated(v, "IdContrasena")
 		return v, nil
 	}
 	return nil, err
@@ -55,7 +57,7 @@ func GetHistorialAccesoById(id int) (v *HistorialAcceso, err error) {
 func GetAllHistorialAcceso(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(HistorialAcceso))
+	qs := o.QueryTable(new(HistorialAcceso)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
