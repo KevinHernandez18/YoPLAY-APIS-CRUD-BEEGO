@@ -33,11 +33,11 @@ WHERE (fecha, id_torneo, id_tipo_distribucion, fase_torneo, id_equipo1, resultad
 
 -- 7. gestion_encuentro.grupo
 DELETE FROM gestion_encuentro.grupo
-WHERE (grupo, activo) IN (
-    ('Grupo A', TRUE),
-    ('Grupo B', TRUE),
-    ('Grupo C', TRUE),
-    ('Grupo D', TRUE),
-    ('Grupo E', TRUE),
-    ('Grupo F', TRUE)
+WHERE (id_torneo, grupo, activo) IN (
+    (1, 'Grupo A', TRUE),
+    (2, 'Grupo B', TRUE),
+    (3, 'Grupo C', TRUE),
+    (4, 'Grupo D', TRUE),
+    (5, 'Grupo E', TRUE),
+    (6, 'Grupo F', TRUE)
 );

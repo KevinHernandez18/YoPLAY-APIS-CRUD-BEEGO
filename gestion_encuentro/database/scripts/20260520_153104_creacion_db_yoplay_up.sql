@@ -1,20 +1,18 @@
 -- 1. SCHEMAS
 CREATE SCHEMA IF NOT EXISTS gestion_encuentro;
 
-DO $$ BEGIN
-    CREATE TYPE resultado_tipo AS ENUM ('Ganador', 'Perdedor');
-EXCEPTION WHEN duplicate_object THEN NULL;
-END $$;
+-- 2. TIPOS ENUM
+CREATE TYPE gestion_encuentro.resultado_tipo
+AS ENUM ('Ganador', 'Perdedor');
 
-DO $$ BEGIN
-    CREATE TYPE fase_torneo AS ENUM ('Grupos', 'Octavos', 'Cuartos', 'Semifinal', 'Final');
-EXCEPTION WHEN duplicate_object THEN NULL;
-END $$;
+CREATE TYPE gestion_encuentro.fase_torneo
+AS ENUM ('Grupos', 'Octavos', 'Cuartos', 'Semifinal', 'Final');
 
 --TABLA DE GRUPO
 CREATE TABLE IF NOT EXISTS gestion_encuentro.grupo (
     id_grupo           SERIAL PRIMARY KEY,
     grupo              VARCHAR(100) NOT NULL,
+    id_torneo          INT REFERENCES gestion_deportiva.torneo(id_torneo) ON DELETE CASCADE,
     activo             BOOLEAN     NOT NULL DEFAULT TRUE,
     fecha_creacion     TIMESTAMP   DEFAULT NOW(),
     fecha_modificacion TIMESTAMP   NOT NULL DEFAULT NOW()
@@ -26,11 +24,11 @@ CREATE TABLE IF NOT EXISTS gestion_encuentro.encuentro (
     fecha                TIMESTAMP      NOT NULL,
     id_torneo            INT            NOT NULL,
     id_tipo_distribucion INT            NOT NULL,
-    fase_torneo          fase_torneo,
+    fase_torneo          gestion_encuentro.fase_torneo,
     id_equipo1           INT            NOT NULL,
-    resultado_equipo1    resultado_tipo,
+    resultado_equipo1    gestion_encuentro.resultado_tipo,
     id_equipo2           INT            NOT NULL,
-    resultado_equipo2    resultado_tipo,
+    resultado_equipo2    gestion_encuentro.resultado_tipo,
     activo               BOOLEAN        NOT NULL DEFAULT TRUE,
     fecha_creacion       TIMESTAMP      DEFAULT NOW(),
     fecha_modificacion   TIMESTAMP      NOT NULL DEFAULT NOW()

@@ -13,7 +13,7 @@ import (
 type Historialtorneos struct {
 	Id                 int       `orm:"column(id_historial_torneo);pk:auto"`
 	NombreTorneo       string    `orm:"column(nombre_torneo)"`
-	IdTorneo           *Torneo   `orm:"column(id_torneo)rel(fk);on delete (cascade)"`
+	IdTorneo           *Torneo   `orm:"column(id_torneo);rel(fk);on_delete(cascade)"`
 	IdUsuario          int       `orm:"column(id_usuario)"`
 	Deporte            string    `orm:"column(deporte)"`
 	Reglamento         string    `orm:"column(reglamento);null"`
@@ -30,7 +30,7 @@ func (t *Historialtorneos) TableName() string {
 }
 
 func init() {
-	orm.RegisterModel(new(Historialtorneos))
+	//orm.RegisterModel(new(Historialtorneos))
 }
 
 // AddHistorialtorneos insert a new Historialtorneos into database and returns

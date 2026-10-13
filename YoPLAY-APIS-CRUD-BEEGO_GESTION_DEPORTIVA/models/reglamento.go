@@ -12,7 +12,7 @@ import (
 
 type Reglamento struct {
 	Id                int       `orm:"column(id_reglamento);pk:auto"`
-	IdTorneo          *Torneo  	`orm:"column(id_torneo)rel(fk);on delete (cascade)"`
+	IdTorneo          *Torneo  	`orm:"column(id_torneo);rel(fk);on_delete(cascade)"`
 	IdTipoReglamento  int       `orm:"column(id_tipo_reglamento)"`
 	IdReglas          int       `orm:"column(id_reglas)"`
 	IdTipoDeporte     int       `orm:"column(id_tipo_deporte)"`
@@ -27,7 +27,7 @@ func (t *Reglamento) TableName() string {
 }
 
 func init() {
-	orm.RegisterModel(new(Reglamento))
+	//orm.RegisterModel(new(Reglamento))
 }
 
 // AddReglamento insert a new Reglamento into database and returns
