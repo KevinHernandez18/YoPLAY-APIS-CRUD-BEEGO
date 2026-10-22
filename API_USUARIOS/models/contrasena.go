@@ -12,10 +12,9 @@ import (
 
 type Contrasena struct {
 	Id                int       `orm:"column(id_contrasena);pk;auto"`
-	Contrasena        string    `orm:"column(contrasena)"`
 	HashContrasena    string    `orm:"column(hash_contrasena)"`
 	IdUsuario         *Usuario  `orm:"column(id_usuario);rel(fk); on_delete(cascade)"`
-	Activo            bool      `orm:"column(activo)"`
+	Activo            bool      `orm:"column(activo);default:true"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
 	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
 }
@@ -132,13 +131,18 @@ func UpdateContrasenaById(m *Contrasena) (err error) {
 	o := orm.NewOrm()
 	v := Contrasena{Id: m.Id}
 	// ascertain id exists in the database
-	if err = o.Read(&v); err == nil {
-		var num int64
-		if num, err = o.Update(m); err == nil {
-			fmt.Println("Number of records updated in database:", num)
-		}
+	if err = o.Read(&v); err != nil {
+		return err
 	}
-	return
+	v.HashContrasena=m.HashContrasena
+	var num int64
+	num, err =o.Update(&v, "HashContrasena")
+	if err!=nil{
+		return err
+	}
+	fmt.Println("Number of records updated in database:", num)
+	
+	return nil
 }
 
 // DeleteContrasena deletes Contrasena by Id and returns error if

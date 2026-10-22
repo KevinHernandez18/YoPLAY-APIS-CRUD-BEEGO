@@ -13,7 +13,7 @@ import (
 type Documento struct {
 	Id                int       `orm:"column(id_documento);pk;auto"`
 	TipoDocumento     string    `orm:"column(tipo_documento)"`
-	Activo            bool      `orm:"column(activo)"`
+	Activo            bool      `orm:"column(activo);default:true"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
 	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
 }
