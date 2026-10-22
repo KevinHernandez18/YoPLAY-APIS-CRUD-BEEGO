@@ -33,16 +33,42 @@ func (c *TorneoController) URLMapping() {
 // @router / [post]
 func (c *TorneoController) Post() {
 	var v models.Torneo
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddTorneo(&v); err == nil {
-			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion existosa", "Data": v}
-		} else {
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "message": "Error en el servidor post: la solicitud tiene una llave duplicada en cliente pkey"}
+
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err != nil {
+		c.Ctx.Output.SetStatus(400)
+		c.Data["json"] = map[string]interface{}{
+			"success": false,
+			"status":  400,
+			"message": "El JSON del torneo no es válido",
+			"detalle": err.Error(),
 		}
-	} else {
-		c.Data["json"] = err.Error()
+		c.ServeJSON()
+		return
 	}
+
+	id, err := models.AddTorneo(&v)
+	if err != nil {
+		c.Ctx.Output.SetStatus(500)
+		c.Data["json"] = map[string]interface{}{
+			"success": false,
+			"status":  500,
+			"message": "Error al crear el torneo",
+			"detalle": err.Error(),
+		}
+		c.ServeJSON()
+		return
+	}
+
+	v.Id = int(id)
+
+	c.Ctx.Output.SetStatus(201)
+	c.Data["json"] = map[string]interface{}{
+		"success": true,
+		"status":  201,
+		"message": "Torneo creado correctamente",
+		"Data":    v,
+	}
+
 	c.ServeJSON()
 }
 

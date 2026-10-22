@@ -12,11 +12,12 @@ import (
 
 type Premiacion struct {
 	Id                 int       `orm:"column(id_premiacion);pk:auto"`
+	IdTorneo           *Torneo   `orm:"column(id_torneo);rel(fk);on_delete(cascade)"`
 	CantidadPremiacion int       `orm:"column(cantidad_premiacion)"`
 	Descripcion        string    `orm:"column(descripcion)"`
 	Activo             bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
+	FechaCreacion      time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null;auto_now_add"`
+	FechaModificacion  time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
 }
 
 func (t *Premiacion) TableName() string {
