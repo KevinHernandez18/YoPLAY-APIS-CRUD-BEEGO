@@ -25,7 +25,7 @@ func (t *Imagen) TableName() string {
 }
 
 func init() {
-	//orm.RegisterModel(new(Imagen))
+	orm.RegisterModel(new(Imagen))
 }
 
 // AddImagen insert a new Imagen into database and returns

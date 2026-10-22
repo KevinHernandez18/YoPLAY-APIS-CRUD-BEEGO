@@ -30,7 +30,7 @@ func (t *Historialtorneos) TableName() string {
 }
 
 func init() {
-	//orm.RegisterModel(new(Historialtorneos))
+	orm.RegisterModel(new(Historialtorneos))
 }
 
 // AddHistorialtorneos insert a new Historialtorneos into database and returns
