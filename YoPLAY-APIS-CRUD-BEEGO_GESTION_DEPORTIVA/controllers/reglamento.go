@@ -32,20 +32,47 @@ func (c *ReglamentoController) URLMapping() {
 // @Success 201 {int} models.Reglamento
 // @Failure 403 body is empty
 // @router / [post]
+
 func (c *ReglamentoController) Post() {
 	var v models.Reglamento
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddReglamento(&v); err == nil {
-			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion existosa", "Data": v}
-		} else {
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "message": "Error en el servidor post: la solicitud tiene una llave duplicada en cliente pkey"}
+
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err != nil {
+		c.Ctx.Output.SetStatus(400)
+		c.Data["json"] = map[string]interface{}{
+			"success": false,
+			"status":  400,
+			"message": "El JSON del reglamento no es válido",
+			"detalle": err.Error(),
 		}
-	} else {
-		c.Data["json"] = err.Error()
+		c.ServeJSON()
+		return
+	}
+
+	id, err := models.AddReglamento(&v)
+	if err != nil {
+		c.Ctx.Output.SetStatus(500)
+		c.Data["json"] = map[string]interface{}{
+			"success": false,
+			"status":  500,
+			"message": "Error al crear el reglamento",
+			"detalle": err.Error(),
+		}
+		c.ServeJSON()
+		return
+	}
+
+	v.Id = int(id)
+
+	c.Ctx.Output.SetStatus(201)
+	c.Data["json"] = map[string]interface{}{
+		"success": true,
+		"status":  201,
+		"message": "Reglamento creado correctamente",
+		"Data":    v,
 	}
 	c.ServeJSON()
 }
+
 
 // GetOne ...
 // @Title Get One

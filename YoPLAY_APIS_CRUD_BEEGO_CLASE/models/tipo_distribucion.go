@@ -12,7 +12,7 @@ import (
 
 type TipoDistribucion struct {
 	Id                int       `orm:"column(id_tipo_distribucion);pk;auto"`
-	Equipos           string    `orm:"column(equipos)"`
+	Divicion           string    `orm:"column(divicion)"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now"`
 	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now"`

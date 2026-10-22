@@ -27,7 +27,7 @@ CREATE TABLE clase.tipo_deporte(
 
 CREATE TABLE clase.tipo_distribucion (
     id_tipo_distribucion   SERIAL PRIMARY KEY,
-    equipos                VARCHAR(2) NOT NULL,
+    divicion               VARCHAR(10) NOT NULL,
     activo                 BOOLEAN NOT NULL DEFAULT TRUE,
     fecha_creacion         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
