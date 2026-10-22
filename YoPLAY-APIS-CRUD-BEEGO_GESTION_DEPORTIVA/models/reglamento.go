@@ -27,7 +27,7 @@ func (t *Reglamento) TableName() string {
 }
 
 func init() {
-	//orm.RegisterModel(new(Reglamento))
+	orm.RegisterModel(new(Reglamento))
 }
 
 // AddReglamento insert a new Reglamento into database and returns

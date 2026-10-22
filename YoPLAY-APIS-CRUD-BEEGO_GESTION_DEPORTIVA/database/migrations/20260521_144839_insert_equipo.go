@@ -19,7 +19,7 @@ func init() {
 
 // Run the migrations
 func (m *InsertEquipo_20260521_144839) Up() {
-m.SQL("INSERT INTO gestion_deportiva.equipo (nombre_equipo,categoria,cantidad_jugadores,region) VALUES ('dorados','sub-15','10','casanare')")
+m.SQL("INSERT INTO gestion_deportiva.equipo (id_torneo,nombre_equipo,categoria,cantidad_jugadores,region) VALUES ('1','dorados','sub-15','10','casanare')")
 
 }
 
