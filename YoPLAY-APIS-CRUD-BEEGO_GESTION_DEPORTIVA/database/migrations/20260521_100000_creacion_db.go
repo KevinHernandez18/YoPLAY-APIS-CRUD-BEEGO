@@ -15,7 +15,7 @@ type CreacionDb_20260521_144655 struct {
 // DO NOT MODIFY
 func init() {
 	m := &CreacionDb_20260521_144655{}
-	m.Created = "20260521_144655"
+	m.Created = "20260521_100000"
 
 	migration.Register("CreacionDb_20260521_144655", m)
 }

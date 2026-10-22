@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
@@ -28,6 +29,25 @@ type Torneo struct {
 	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);null;auto_now"`
 }
 
+func (t Torneo) MarshalJSON() ([]byte, error) {
+	type torneoAlias Torneo
+	return json.Marshal(struct {
+		FechaInicio string `json:"FechaInicio"`
+		FechaFin    string `json:"FechaFin"`
+		torneoAlias
+	}{
+		FechaInicio: formatTorneoDate(t.FechaInicio),
+		FechaFin:    formatTorneoDate(t.FechaFin),
+		torneoAlias: torneoAlias(t),
+	})
+}
+
+func formatTorneoDate(value time.Time) string {
+	date := value.UTC()
+	localDate := time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.FixedZone("UTC-05:00", -5*60*60))
+	return localDate.Format(time.RFC3339)
+}
+
 func (t *Torneo) TableName() string {
 	return "torneo"
 }
@@ -50,7 +70,6 @@ func GetTorneoById(id int) (v *Torneo, err error) {
 	o := orm.NewOrm()
 	v = &Torneo{Id: id}
 	if err = o.Read(v); err == nil {
-		o.LoadRelated(v,"IdPremiacion")
 		return v, nil
 	}
 	return nil, err
@@ -124,7 +143,13 @@ func GetAllTorneo(query map[string]string, fields []string, sortby []string, ord
 				m := make(map[string]interface{})
 				val := reflect.ValueOf(v)
 				for _, fname := range fields {
-					m[fname] = val.FieldByName(fname).Interface()
+					field := val.FieldByName(fname).Interface()
+					if fname == "FechaInicio" || fname == "FechaFin" {
+						if date, ok := field.(time.Time); ok {
+							field = formatTorneoDate(date)
+						}
+					}
+					m[fname] = field
 				}
 				ml = append(ml, m)
 			}

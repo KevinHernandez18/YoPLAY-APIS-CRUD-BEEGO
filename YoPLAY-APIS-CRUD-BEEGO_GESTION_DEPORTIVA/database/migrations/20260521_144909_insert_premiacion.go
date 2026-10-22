@@ -19,7 +19,7 @@ func init() {
 
 // Run the migrations
 func (m *InsertPremiacion_20260521_144909) Up() {
-m.SQL("INSERT INTO gestion_deportiva.premiacion (cantidad_premiacion,descripcion) VALUES ('1','se ganara un millon de pesos')")
+m.SQL("INSERT INTO gestion_deportiva.premiacion (id_torneo,cantidad_premiacion,descripcion) VALUES ('1','1','se ganara un millon de pesos')")
 
 }
 

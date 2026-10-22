@@ -1,31 +1,24 @@
 CREATE SCHEMA IF NOT EXISTS gestion_deportiva;
 
+-- =====================================================
+-- 1. IMAGEN
+-- Se crea primero porque TORNEO tendrá la FK id_imagen
+-- =====================================================
 
-
-CREATE TABLE gestion_deportiva.premiacion (
-    id_premiacion          SERIAL PRIMARY KEY,
-    cantidad_premiacion    INTEGER NOT NULL,
-    descripcion            TEXT NOT NULL,
-    activo                 BOOLEAN NOT NULL DEFAULT TRUE,
-    fecha_creacion         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
-
-CREATE TABLE gestion_deportiva.equipo (
-    id_equipo              SERIAL PRIMARY KEY,
-    nombre_equipo          VARCHAR(100) NOT NULL,
-    categoria              VARCHAR(100),
-    cantidad_jugadores     INTEGER,
-    region                 VARCHAR(100) NOT NULL,
+CREATE TABLE gestion_deportiva.imagen (
+    id_imagen              SERIAL PRIMARY KEY,
+    url_imagen             TEXT NOT NULL,
+    tipo_imagen            VARCHAR(100) NOT NULL,
     activo                 BOOLEAN DEFAULT TRUE,
     fecha_creacion         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
-
+-- =====================================================
+-- 2. EQUIPO
+-- Se crea antes que INTEGRANTES y CLASIFICACION
+-- =====================================================
 CREATE TABLE gestion_deportiva.torneo (
     id_torneo              SERIAL PRIMARY KEY,
     id_tipo_deporte        INTEGER NOT NULL,
@@ -34,36 +27,68 @@ CREATE TABLE gestion_deportiva.torneo (
     fecha_fin              DATE NOT NULL,
     ubicacion              VARCHAR(200) NOT NULL,
     objetivo               TEXT NOT NULL,
-    id_imagen              INTEGER,
+    id_imagen              INTEGER UNIQUE,
     fecha_fase             VARCHAR(100),
     cantidad_equipo        INTEGER NOT NULL,
     id_tipo_distribucion   INTEGER NOT NULL,
-    id_premiacion          INTEGER NOT NULL,
+    cantidadgrupos         INTEGER,
     activo                 BOOLEAN DEFAULT TRUE,
     fecha_creacion         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_torneo_premiacion
-        FOREIGN KEY (id_premiacion)
-        REFERENCES gestion_deportiva.premiacion(id_premiacion) ON DELETE CASCADE
+    CONSTRAINT fk_torneo_imagen
+        FOREIGN KEY (id_imagen)
+        REFERENCES gestion_deportiva.imagen(id_imagen)
+        ON DELETE SET NULL
 );
 
+CREATE TABLE gestion_deportiva.equipo (
+    id_equipo          SERIAL PRIMARY KEY,
+    id_torneo          INTEGER NOT NULL,
+    nombre_equipo      VARCHAR(100) NOT NULL,
+    categoria          VARCHAR(100),
+    cantidad_jugadores INTEGER,
+    region             VARCHAR(100) NOT NULL,
+    activo             BOOLEAN DEFAULT TRUE,
+    fecha_creacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-
-CREATE TABLE gestion_deportiva.imagen (
-    id_imagen              SERIAL PRIMARY KEY,
-    id_torneo              INTEGER,
-    url_imagen             TEXT NOT NULL,
-    tipo_imagen            VARCHAR(100) NOT NULL,
-    activo                 BOOLEAN DEFAULT TRUE,
-    fecha_creacion         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_imagen_torneo
+    CONSTRAINT fk_equipo_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo) ON DELETE CASCADE
+        REFERENCES gestion_deportiva.torneo(id_torneo)
+        ON DELETE CASCADE
 );
 
+
+
+
+
+
+-- =====================================================
+-- 4. PREMIACION
+-- Depende de TORNEO
+-- =====================================================
+
+CREATE TABLE gestion_deportiva.premiacion (
+    id_premiacion          SERIAL PRIMARY KEY,
+    id_torneo              INTEGER NOT NULL,
+    cantidad_premiacion    INTEGER NOT NULL,
+    descripcion            TEXT NOT NULL,
+    activo                 BOOLEAN NOT NULL DEFAULT TRUE,
+    fecha_creacion         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_premiacion_torneo
+        FOREIGN KEY (id_torneo)
+        REFERENCES gestion_deportiva.torneo(id_torneo)
+        ON DELETE CASCADE
+);
+
+
+-- =====================================================
+-- 5. DISTRIBUCION
+-- Depende de TORNEO
+-- =====================================================
 
 CREATE TABLE gestion_deportiva.distribucion (
     id_distribucion        SERIAL PRIMARY KEY,
@@ -76,10 +101,15 @@ CREATE TABLE gestion_deportiva.distribucion (
 
     CONSTRAINT fk_distribucion_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo) ON DELETE CASCADE
+        REFERENCES gestion_deportiva.torneo(id_torneo)
+        ON DELETE CASCADE
 );
 
 
+-- =====================================================
+-- 6. REGLAMENTO
+-- Depende de TORNEO
+-- =====================================================
 
 CREATE TABLE gestion_deportiva.reglamento (
     id_reglamento          SERIAL PRIMARY KEY,
@@ -94,14 +124,18 @@ CREATE TABLE gestion_deportiva.reglamento (
 
     CONSTRAINT fk_reglamento_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo) ON DELETE CASCADE
+        REFERENCES gestion_deportiva.torneo(id_torneo)
+        ON DELETE CASCADE
 );
 
 
+-- =====================================================
+-- 7. INTEGRANTES
+-- Depende de EQUIPO
+-- =====================================================
 
 CREATE TABLE gestion_deportiva.integrantes (
     id_integrante          SERIAL PRIMARY KEY,
-
     id_equipo              INTEGER,
     nombre                 VARCHAR(100) NOT NULL,
     posicion               VARCHAR(100) NOT NULL,
@@ -113,10 +147,15 @@ CREATE TABLE gestion_deportiva.integrantes (
 
     CONSTRAINT fk_integrante_equipo
         FOREIGN KEY (id_equipo)
-        REFERENCES gestion_deportiva.equipo(id_equipo) ON DELETE CASCADE
+        REFERENCES gestion_deportiva.equipo(id_equipo)
+        ON DELETE CASCADE
 );
 
 
+-- =====================================================
+-- 8. CLASIFICACION
+-- Depende de TORNEO y EQUIPO
+-- =====================================================
 
 CREATE TABLE gestion_deportiva.clasificacion (
     id_clasificacion       SERIAL PRIMARY KEY,
@@ -134,14 +173,20 @@ CREATE TABLE gestion_deportiva.clasificacion (
 
     CONSTRAINT fk_clasificacion_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo)ON DELETE CASCADE,
+        REFERENCES gestion_deportiva.torneo(id_torneo)
+        ON DELETE CASCADE,
 
     CONSTRAINT fk_clasificacion_equipo
         FOREIGN KEY (id_equipo)
-        REFERENCES gestion_deportiva.equipo(id_equipo)ON DELETE CASCADE
+        REFERENCES gestion_deportiva.equipo(id_equipo)
+        ON DELETE CASCADE
 );
 
 
+-- =====================================================
+-- 9. HISTORIAL DE TORNEOS
+-- Depende de TORNEO
+-- =====================================================
 
 CREATE TABLE gestion_deportiva.historialtorneos (
     id_historial_torneo    SERIAL PRIMARY KEY,
@@ -159,5 +204,6 @@ CREATE TABLE gestion_deportiva.historialtorneos (
 
     CONSTRAINT fk_historial_torneo
         FOREIGN KEY (id_torneo)
-        REFERENCES gestion_deportiva.torneo(id_torneo)ON DELETE CASCADE
+        REFERENCES gestion_deportiva.torneo(id_torneo)
+        ON DELETE CASCADE
 );

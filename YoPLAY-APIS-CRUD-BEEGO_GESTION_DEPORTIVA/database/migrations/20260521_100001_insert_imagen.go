@@ -12,7 +12,7 @@ type InsertImagen_20260521_144854 struct {
 // DO NOT MODIFY
 func init() {
 	m := &InsertImagen_20260521_144854{}
-	m.Created = "20260521_144854"
+	m.Created = "20260521_100001"
 
 	migration.Register("InsertImagen_20260521_144854", m)
 }
