@@ -12,7 +12,7 @@ import (
 
 type Integrantes struct {
 	Id                int       `orm:"column(id_integrante);pk:auto"`
-	IdEquipo          *Equipo  	`orm:"column(id_equipo);rel(fk);on delete (cascade)"`
+	IdEquipo          *Equipo  	`orm:"column(id_equipo);rel(fk);on_delete;(cascade)"`
 	Nombre            string    `orm:"column(nombre)"`
 	Posicion          string    `orm:"column(posicion)"`
 	Correo            string    `orm:"column(correo)"`
@@ -27,7 +27,7 @@ func (t *Integrantes) TableName() string {
 }
 
 func init() {
-	orm.RegisterModel(new(Integrantes))
+	//orm.RegisterModel(new(Integrantes))
 }
 
 // AddIntegrantes insert a new Integrantes into database and returns

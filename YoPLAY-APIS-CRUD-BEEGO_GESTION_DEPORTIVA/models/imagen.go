@@ -12,6 +12,7 @@ import (
 
 type Imagen struct {
 	Id                int       `orm:"column(id_imagen);pk:auto"`
+	IdTorneo          *Torneo  	`orm:"column(id_torneo);rel(fk);on_delete(cascade)"`
 	UrlImagen         string    `orm:"column(url_imagen)"`
 	TipoImagen        string    `orm:"column(tipo_imagen)"`
 	Activo            bool      `orm:"column(activo);null"`
@@ -24,7 +25,7 @@ func (t *Imagen) TableName() string {
 }
 
 func init() {
-	orm.RegisterModel(new(Imagen))
+	//orm.RegisterModel(new(Imagen))
 }
 
 // AddImagen insert a new Imagen into database and returns

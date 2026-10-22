@@ -13,6 +13,7 @@ import (
 type Grupo struct {
 	Id                int       `orm:"column(id_grupo);pk;auto"`
 	Grupo             string    `orm:"column(grupo)"`
+	IdTorneo 		  int  	`orm:"column(id_torneo)"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);auto_now_add"`
 	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);auto_now_add"`
