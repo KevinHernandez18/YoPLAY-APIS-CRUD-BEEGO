@@ -19,7 +19,7 @@ func init() {
 
 // Run the migrations
 func (m *InsertTipoDistribucion_20260520_171332) Up() {
-	m.SQL("INSERT INTO clase.tipo_distribucion (equipos) VALUES ('10')") 
+	m.SQL("INSERT INTO clase.tipo_distribucion (divicion) VALUES ('grupos')") 
 
 }
 

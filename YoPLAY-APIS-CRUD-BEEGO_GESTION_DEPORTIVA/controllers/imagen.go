@@ -32,20 +32,51 @@ func (c *ImagenController) URLMapping() {
 // @Success 201 {int} models.Imagen
 // @Failure 403 body is empty
 // @router / [post]
+
 func (c *ImagenController) Post() {
 	var v models.Imagen
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddImagen(&v); err == nil {
-			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 200, "message": "Peticion existosa", "Data": v}
-		} else {
-			c.Data["json"] = map[string]interface{}{"success": true, "status": 400, "message": "Error en el servidor post: la solicitud tiene una llave duplicada en cliente pkey"}
+
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err != nil {
+		c.Ctx.Output.SetStatus(400)
+		c.Data["json"] = map[string]interface{}{
+			"success": false,
+			"status":  400,
+			"message": "JSON inválido",
+			"detalle": err.Error(),
 		}
-	} else {
-		c.Data["json"] = err.Error()
+		c.ServeJSON()
+		return
+	}
+
+	id, err := models.AddImagen(&v)
+	if err != nil {
+		logs.Error("Error real al crear imagen: %v", err)
+
+		c.Ctx.Output.SetStatus(500)
+		c.Data["json"] = map[string]interface{}{
+			"success": false,
+			"status":  500,
+			"message": "Error al crear la imagen",
+			"detalle": err.Error(),
+		}
+		c.ServeJSON()
+		return
+	}
+
+	c.Ctx.Output.SetStatus(201)
+	c.Data["json"] = map[string]interface{}{
+		"success": true,
+		"status":  201,
+		"message": "Imagen creada correctamente",
+		"Data": map[string]interface{}{
+			"Id":        id,
+			"UrlImagen": v.UrlImagen,
+			"TipoImagen": v.TipoImagen,
+		},
 	}
 	c.ServeJSON()
 }
+
 
 // GetOne ...
 // @Title Get One
