@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS usuarios.usuario (
     email              VARCHAR(50) NOT NULL UNIQUE,
     telefono           VARCHAR(12) NOT NULL,
     fecha_nacimiento   DATE NOT NULL,
-
+    terminos           BOOLEAN NOT NULL DEFAULT FALSE,
     id_documento       INT NOT NULL,
     CONSTRAINT fk_usuario_documento
         FOREIGN KEY (id_documento)
@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS usuarios.usuario (
 
 CREATE TABLE IF NOT EXISTS usuarios.contrasena (
     id_contrasena      SERIAL PRIMARY KEY,
-    contrasena         VARCHAR(255) NOT NULL,
     hash_contrasena    VARCHAR(255) NOT NULL,
 
     id_usuario         INT NOT NULL,
